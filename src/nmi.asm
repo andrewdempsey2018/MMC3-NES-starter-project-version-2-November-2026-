@@ -68,35 +68,26 @@ no_irq:
   jsr read_controller
 
 ; --------------------------------------------------
-; Draw a row of meta tiles If scrolling is on and 
-; if the scroll threshold has been reached -
-; (every 16 frames)
+; Draw tile
 ; --------------------------------------------------
-  lda do_scroll
-  beq dont_scroll
-
   lda scroll_y
-  and #%00001111 ; multiple of 16
+  and #%00000111 ; multiple of 8
   bne dont_draw_row
   jsr draw_row
-
-  lda #$01
-  sta prep_next_row
   
 dont_draw_row:
 
 ; --------------------------------------------------
 ; Handle scrolling
 ; --------------------------------------------------
-  dec scroll_y
+  inc scroll_y
   lda scroll_y
-  cmp #255
+  cmp #240
   bne dont_reset_scroll_value
-  lda #239
+  lda #0
   sta scroll_y
 dont_reset_scroll_value:
 
-dont_scroll:
   lda scroll_x
   sta PPUSCROLL
   lda scroll_y

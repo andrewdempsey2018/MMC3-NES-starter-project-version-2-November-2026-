@@ -1,19 +1,23 @@
 Modules list:
 -------------
 main.o:
-    RODATA            Offs=000000  Size=00004D  Align=00001  Fill=0000
-    ZEROPAGE          Offs=000000  Size=00001D  Align=00001  Fill=0000
-    FIXED_CODE0       Offs=000000  Size=000988  Align=00001  Fill=0000
-    FIXED_CODE1       Offs=000000  Size=0003EF  Align=00001  Fill=0000
+    RODATA            Offs=000000  Size=00047A  Align=00001  Fill=0000
+    BSS               Offs=000000  Size=000028  Align=00001  Fill=0000
+    ZEROPAGE          Offs=000000  Size=000015  Align=00001  Fill=0000
+    CODE0             Offs=000000  Size=0002B0  Align=00001  Fill=0000
+    CODE1             Offs=000000  Size=00016C  Align=00001  Fill=0000
+    CODE2             Offs=000000  Size=00016C  Align=00001  Fill=0000
+    FIXED_CODE1       Offs=000000  Size=000249  Align=00001  Fill=0000
     HEADER            Offs=000000  Size=000010  Align=00001  Fill=0000
+    FIXED_CODE0       Offs=000000  Size=0001B6  Align=00001  Fill=0000
     VECTORS           Offs=000000  Size=000006  Align=00001  Fill=0000
     CHR_ROM           Offs=000000  Size=008000  Align=00001  Fill=0000
 stage1_data.o:
-    FIXED_CODE0       Offs=000988  Size=0002B0  Align=00001  Fill=0000
+    CODE0             Offs=0002B0  Size=0002B0  Align=00001  Fill=0000
 stage2_data.o:
-    FIXED_CODE0       Offs=000C38  Size=00016C  Align=00001  Fill=0000
+    CODE1             Offs=00016C  Size=00016C  Align=00001  Fill=0000
 stage3_data.o:
-    FIXED_CODE0       Offs=000DA4  Size=00016C  Align=00001  Fill=0000
+    CODE2             Offs=00016C  Size=00016C  Align=00001  Fill=0000
 
 
 Segment list:
@@ -22,10 +26,14 @@ Name                   Start     End    Size  Align
 ----------------------------------------------------
 CHR_ROM               000000  007FFF  008000  00001
 HEADER                000000  00000F  000010  00001
-ZEROPAGE              000000  00001C  00001D  00001
-FIXED_CODE0           00C000  00CF0F  000F10  00001
-FIXED_CODE1           00E000  00E3EE  0003EF  00001
-RODATA                00E400  00E44C  00004D  00001
+ZEROPAGE              000000  000014  000015  00001
+BSS                   000300  000327  000028  00001
+CODE0                 008000  00855F  000560  00001
+CODE2                 008000  0082D7  0002D8  00001
+CODE1                 00A000  00A2D7  0002D8  00001
+FIXED_CODE0           00C000  00C1B5  0001B6  00001
+FIXED_CODE1           00E000  00E248  000249  00001
+RODATA                00E300  00E779  00047A  00001
 VECTORS               00FFFA  00FFFF  000006  00001
 
 

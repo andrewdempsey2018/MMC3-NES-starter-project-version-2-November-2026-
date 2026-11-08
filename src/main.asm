@@ -1,39 +1,46 @@
 ; --------------------------------------------------
 ; Constants
 ; --------------------------------------------------
-TITLE_SCREEN_SCENE = 0
-LEVEL_1_SCENE = 1
-LEVEL_2_SCENE = 2
+LEVEL_1_SCENE = 0
+LEVEL_2_SCENE = 1
+LEVEL_3_SCENE = 2
 
 .segment "ZEROPAGE"
 sleeping: .res 1
 scroll_x: .res 1
 scroll_y: .res 1
-ptr: .res 2
-ptr_lo = ptr
-ptr_hi = ptr+1
 row_number: .res 1
-row_tile_ptr: .res 2
-row_tile_ptr_lo = row_tile_ptr
-row_tile_ptr_hi = row_tile_ptr+1
-row_attrib_ptr: .res 2
-row_attrib_ptr_lo = row_attrib_ptr
-row_attrib_ptr_hi = row_attrib_ptr+1
-prep_next_row: .res 1
-screen_number: .res 1
-do_scroll: .res 1
 do_irq: .res 1
 scene_number: .res 1
 
-screens_sequence_lo_ptr: .res 2
-screens_sequence_hi_ptr: .res 2
+tile_ptr: .res 2
+tile_ptr_lo = tile_ptr
+tile_ptr_hi = tile_ptr + 1
 
-attribs_sequence_lo_ptr: .res 2
-attribs_sequence_hi_ptr: .res 2
+attrib_ptr: .res 2
+attrib_ptr_lo = attrib_ptr
+attrib_ptr_hi = attrib_ptr + 1
 
-metatiles_top_ptr: .res 2
-metatiles_bottom_ptr: .res 2
+do_prep_row: .res 1
+do_prep_attrib: .res 1
 
+temp: .res 1
+ptr: .res 2
+ptr_lo = ptr
+ptr_hi = ptr + 1
+
+;;;
+metatile_top_ptr: .res 2
+metatile_top_ptr_lo = metatile_top_ptr
+metatile_top_ptr_hi = metatile_top_ptr + 1
+
+metatile_bottom_ptr: .res 2
+metatile_bottom_ptr_lo = metatile_bottom_ptr
+metatile_bottom_ptr_hi = metatile_bottom_ptr + 1
+
+.segment "BSS"
+row_data: .res 32
+attrib_data: .res 8
 
 .segment "RODATA"
 palette_table:
@@ -48,9 +55,9 @@ palette_table:
   .byte $0F,$06,$16,$26
   .byte $0F,$09,$19,$29
 
-.include "../data/title_data.asm"
 .include "../data/stage1_data.asm"
 .include "../data/stage2_data.asm"
+.include "../data/stage3_data.asm"
 .include "../data/statusbar_data.asm"
 
 .segment "FIXED_CODE1"
@@ -64,9 +71,9 @@ palette_table:
 .include "nmi.asm"
 .include "irq.asm"
 .include "controllers.asm"
+.include "change_level.asm"
 .include "prepare_row.asm"
 .include "draw_row.asm"
-.include "change_level.asm"
 
 main:
 ; --------------------------------------------------
@@ -103,28 +110,18 @@ main:
   sta buttons_pressed
   sta scroll_x
   sta scroll_y
-  sta ptr_lo
-  sta ptr_hi
-  sta prep_next_row
-  sta screen_number
-  sta do_scroll
   sta do_irq
   sta row_number
+  sta tile_ptr_lo
+  sta tile_ptr_hi
+  sta attrib_ptr_lo
+  sta attrib_ptr_hi
+  sta do_prep_row
+  sta do_prep_attrib
 
-  sta screens_sequence_lo_ptr
-  sta screens_sequence_lo_ptr + 1
-  sta screens_sequence_hi_ptr
-  sta screens_sequence_hi_ptr + 1
-
-  sta attribs_sequence_lo_ptr
-  sta attribs_sequence_lo_ptr + 1
-  sta attribs_sequence_hi_ptr
-  sta attribs_sequence_hi_ptr + 1
-
-  sta metatiles_top_ptr
-  sta metatiles_top_ptr + 1
-  sta metatiles_bottom_ptr
-  sta metatiles_bottom_ptr + 1
+  sta temp
+  sta ptr_lo
+  sta ptr_hi
 
 ; --------------------------------------------------
 ; Load status bar into nametable 01 ($2400)
@@ -159,7 +156,52 @@ main:
 ; start first level
 ; --------------------------------------------------
 
-  lda #1
+  ;lda #<ScreenTest
+  ;sta tile_ptr_lo
+  ;lda #>ScreenTest
+  ;sta tile_ptr_hi
+
+  ;lda #<ScreenTestAttrib
+  ;sta attrib_ptr_lo
+  ;lda #>ScreenTestAttrib
+  ;sta attrib_ptr_hi
+
+  ldy #0
+:
+  lda (attrib_ptr), y
+  sta attrib_data, y
+  iny
+  cpy #8
+  bne :-
+
+  lda attrib_ptr_lo
+  clc
+  adc #8
+  sta attrib_ptr_lo
+  lda attrib_ptr_hi
+  adc #0
+  sta attrib_ptr_hi
+
+  lda #0
+  sta temp
+  ldx #0
+:
+  ldy temp
+  lda (tile_ptr), y
+  asl a
+  tay
+  lda (metatile_top_ptr), y
+  sta row_data, x
+  iny
+  inx
+  lda (metatile_top_ptr), y
+  sta row_data, x
+  inc temp
+  inx
+  cpx #32
+  bne :-
+
+  lda #0
   sta scene_number
   jsr change_level
 
@@ -187,21 +229,10 @@ main_loop:
 ; Update current scene
 ; --------------------------------------------------
   lda scene_number
-  cmp #TITLE_SCREEN_SCENE
-  beq @title_screen_scene
   cmp #LEVEL_1_SCENE
   beq @level_1_scene
   cmp #LEVEL_2_SCENE
   beq @level_2_scene
-
-@title_screen_scene:
-  lda buttons_pressed
-  and #BTN_START
-  beq finished_updating_scene
-  lda #$01
-  sta scene_number
-  jsr change_level
-  jmp finished_updating_scene
 
 @level_1_scene:
   lda buttons_pressed
@@ -226,38 +257,12 @@ finished_updating_scene:
 ; next screen should be loaded.
 ; Reset prep_next_row flag when done.
 ; --------------------------------------------------
-  lda prep_next_row
+; --------------------------------------------------
+; Rendering
+; --------------------------------------------------
+  lda do_prep_row
   beq dont_prepare_row
   jsr prepare_row
-
-  lda #$00
-  sta prep_next_row
-
-  dec row_number
-
-  lda row_number
-  cmp #255
-  bne dont_reset_row_number
-  lda #14
-  sta row_number
-  
-  inc screen_number
-
-  ldy screen_number
-  lda (screens_sequence_lo_ptr), y
-  sta row_tile_ptr_lo
-  lda (screens_sequence_hi_ptr), y
-  sta row_tile_ptr_hi
-
-
-; attribs
-  ;lda (stage1_attribs_sequence_lo_table), y
-  ;sta row_attrib_ptr_lo
-  ;lda (stage1_attribs_sequence_hi_table), y
-  ;sta row_attrib_ptr_hi
-
-dont_reset_row_number:
-
 dont_prepare_row:
 
 ; --------------------------------------------------
@@ -278,10 +283,10 @@ sleep:
   .word irq
 
 .segment "CHR_ROM"
-  .incbin "../chr/gfx_title.chr"
-  .incbin "../chr/gfx_lev1.chr"
-  .incbin "../chr/gfx_lev2.chr"
-  .incbin "../chr/gfx_lev3.chr"
+  .incbin "../chr/gfx_other.chr" ; CHR banks 0,2,4,5,6,7
+  .incbin "../chr/gfx_lev1.chr" ; CHR banks 8,10,12,13,14,15
+  .incbin "../chr/gfx_lev2.chr" ; CHR banks 16,18,20,21,22,23
+  .incbin "../chr/gfx_lev3.chr" ; CHR banks 24,26,28,29,30,31
 
 .segment "CODE0"
 .segment "CODE1"
@@ -289,3 +294,4 @@ sleep:
 .segment "CODE3"
 .segment "CODE4"
 .segment "CODE5"
+.segment "FIXED_CODE0"

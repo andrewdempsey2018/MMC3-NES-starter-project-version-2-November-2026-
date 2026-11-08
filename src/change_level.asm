@@ -32,13 +32,7 @@ change_level:
   sta scroll_x
 ; --------------------------------------------------
 
-
-
   lda scene_number
-  cmp #TITLE_SCREEN_SCENE
-  bne :+
-  jmp @title_screen_scene
-:
   cmp #LEVEL_1_SCENE
   bne :+
   jmp @level_1_scene
@@ -47,13 +41,19 @@ change_level:
   bne :+
   jmp @level_2_scene
 :
-
-@title_screen_scene:
-  jmp level_loaded
+  cmp #LEVEL_3_SCENE
+  bne :+
+  jmp @level_3_scene
+:
 
 @level_1_scene:
+; prg rom switch
+  lda #%00000110
+  sta MMC3_BANK_SELECT
+  lda #0
+  sta MMC3_BANK_DATA
 
-; change chr
+; CHR rom switch
   lda #%00000000
   sta MMC3_BANK_SELECT
   lda #8
@@ -85,44 +85,49 @@ change_level:
   sta MMC3_BANK_DATA
 
 ; init pointers
-  lda #<stage1_sequence_lo_table
-  sta screens_sequence_lo_ptr
-  lda #>stage1_sequence_lo_table
-  sta screens_sequence_lo_ptr + 1
+  ;lda #<stage1_sequence_lo_table
+  ;sta screens_sequence_lo_ptr
+  ;lda #>stage1_sequence_lo_table
+  ;sta screens_sequence_lo_ptr + 1
 
-  lda #<stage1_sequence_hi_table
-  sta screens_sequence_hi_ptr
-  lda #>stage1_sequence_hi_table
-  sta screens_sequence_hi_ptr + 1
+  ;lda #<stage1_sequence_hi_table
+  ;sta screens_sequence_hi_ptr
+  ;lda #>stage1_sequence_hi_table
+  ;sta screens_sequence_hi_ptr + 1
 
-  lda #<stage1_attribs_sequence_lo_table
-  sta attribs_sequence_lo_ptr
-  lda #>stage1_attribs_sequence_lo_table
-  sta attribs_sequence_lo_ptr + 1
+  ;lda #<stage1_attribs_sequence_lo_table
+  ;sta attribs_sequence_lo_ptr
+  ;lda #>stage1_attribs_sequence_lo_table
+  ;sta attribs_sequence_lo_ptr + 1
 
-  lda #<stage1_attribs_sequence_hi_table
-  sta attribs_sequence_hi_ptr
-  lda #>stage1_attribs_sequence_hi_table
-  sta attribs_sequence_hi_ptr + 1
+  ;lda #<stage1_attribs_sequence_hi_table
+  ;sta attribs_sequence_hi_ptr
+  ;lda #>stage1_attribs_sequence_hi_table
+  ;sta attribs_sequence_hi_ptr + 1
 
-  lda #<stage1_metatiles_top_table
-  sta metatiles_top_ptr
-  lda #>stage1_metatiles_top_table
-  sta metatiles_top_ptr + 1
+  ;lda #<stage1_metatiles_top_table
+  ;sta metatiles_top_ptr
+  ;lda #>stage1_metatiles_top_table
+  ;sta metatiles_top_ptr + 1
 
-  lda #<stage1_metatiles_bottom_table
-  sta metatiles_bottom_ptr
-  lda #>stage1_metatiles_bottom_table
-  sta metatiles_bottom_ptr + 1
+  ;lda #<stage1_metatiles_bottom_table
+  ;sta metatiles_bottom_ptr
+  ;lda #>stage1_metatiles_bottom_table
+  ;sta metatiles_bottom_ptr + 1
 
 ; turn on scrolling & MMC scanline IRQ
   lda #$01
-  sta do_scroll
+  ;sta do_scroll
   sta do_irq
 
   jmp level_loaded
 
 @level_2_scene:
+; prg rom switch
+  lda #%00000111
+  sta MMC3_BANK_SELECT
+  lda #1
+  sta MMC3_BANK_DATA
 
 ; change chr
   lda #%00000000
@@ -156,39 +161,46 @@ change_level:
   sta MMC3_BANK_DATA
 
 ; init pointers
-  lda #<stage2_sequence_lo_table
-  sta screens_sequence_lo_ptr
-  lda #>stage2_sequence_lo_table
-  sta screens_sequence_lo_ptr + 1
+  ;lda #<stage2_sequence_lo_table
+  ;sta screens_sequence_lo_ptr
+  ;lda #>stage2_sequence_lo_table
+  ;sta screens_sequence_lo_ptr + 1
 
-  lda #<stage2_sequence_hi_table
-  sta screens_sequence_hi_ptr
-  lda #>stage2_sequence_hi_table
-  sta screens_sequence_hi_ptr + 1
+  ;lda #<stage2_sequence_hi_table
+  ;sta screens_sequence_hi_ptr
+  ;lda #>stage2_sequence_hi_table
+  ;sta screens_sequence_hi_ptr + 1
 
-  lda #<stage2_attribs_sequence_lo_table
-  sta attribs_sequence_lo_ptr
-  lda #>stage2_attribs_sequence_lo_table
-  sta attribs_sequence_lo_ptr + 1
+  ;lda #<stage2_attribs_sequence_lo_table
+  ;sta attribs_sequence_lo_ptr
+  ;lda #>stage2_attribs_sequence_lo_table
+  ;sta attribs_sequence_lo_ptr + 1
 
-  lda #<stage2_attribs_sequence_hi_table
-  sta attribs_sequence_hi_ptr
-  lda #>stage2_attribs_sequence_hi_table
-  sta attribs_sequence_hi_ptr + 1
+  ;lda #<stage2_attribs_sequence_hi_table
+  ;sta attribs_sequence_hi_ptr
+  ;lda #>stage2_attribs_sequence_hi_table
+  ;sta attribs_sequence_hi_ptr + 1
 
-  lda #<stage2_metatiles_top_table
-  sta metatiles_top_ptr
-  lda #>stage2_metatiles_top_table
-  sta metatiles_top_ptr + 1
+  ;lda #<stage2_metatiles_top_table
+  ;sta metatiles_top_ptr
+  ;lda #>stage2_metatiles_top_table
+  ;sta metatiles_top_ptr + 1
 
-  lda #<stage2_metatiles_bottom_table
-  sta metatiles_bottom_ptr
-  lda #>stage2_metatiles_bottom_table
-  sta metatiles_bottom_ptr + 1
+  ;lda #<stage2_metatiles_bottom_table
+  ;sta metatiles_bottom_ptr
+  ;lda #>stage2_metatiles_bottom_table
+  ;sta metatiles_bottom_ptr + 1
 
 ; turn on scrolling & MMC scanline IRQ
   lda #$01
-  sta do_scroll
+  ;sta do_scroll
+  sta do_irq
+
+  jmp level_loaded
+
+@level_3_scene:
+  lda #$01
+  ;sta do_scroll
   sta do_irq
 
   jmp level_loaded

@@ -9,6 +9,7 @@ LEVEL_3_SCENE = 2
 sleeping: .res 1
 scroll_x: .res 1
 scroll_y: .res 1
+do_scroll: .res 1
 row_number: .res 1
 do_irq: .res 1
 scene_number: .res 1
@@ -111,6 +112,7 @@ main:
   sta scroll_x
   sta scroll_y
   sta do_irq
+  sta do_scroll
   sta row_number
   sta tile_ptr_lo
   sta tile_ptr_hi
@@ -193,6 +195,8 @@ main_loop:
   beq @level_1_scene
   cmp #LEVEL_2_SCENE
   beq @level_2_scene
+  cmp #LEVEL_3_SCENE
+  beq @level_3_scene
 
 @level_1_scene:
   lda buttons_pressed
@@ -257,9 +261,9 @@ sleep:
   .incbin "../chr/gfx_lev2.chr" ; CHR banks 16,18,20,21,22,23
   .incbin "../chr/gfx_lev3.chr" ; CHR banks 24,26,28,29,30,31
 
-.segment "CODE0"
-.segment "CODE1"
-.segment "CODE2"
+;.segment "CODE0"
+;.segment "CODE1"
+;.segment "CODE2"
 .segment "CODE3"
 .segment "CODE4"
 .segment "CODE5"

@@ -70,6 +70,10 @@ no_irq:
 ; --------------------------------------------------
 ; Draw tile
 ; --------------------------------------------------
+
+  lda do_scroll
+  beq dont_scroll
+
   lda scroll_y
   and #%00000111 ; multiple of 8
   bne dont_draw_row
@@ -88,6 +92,7 @@ dont_draw_row:
   sta scroll_y
 dont_reset_scroll_value:
 
+dont_scroll:
   lda scroll_x
   sta PPUSCROLL
   lda scroll_y

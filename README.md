@@ -11,6 +11,8 @@ Contains basic, expandable implementations of:
 * Status bar
 * Controller input
 
+![alt text](image.png)
+
 # A note on AI contributions:
 
 This project is intentionally written and maintained by humans. Please don't use AI coding agents or code-generation tools to modify the project. This isn't an anti-AI statement, it's simply a choice I'm making for this project. Thanks for respecting it.

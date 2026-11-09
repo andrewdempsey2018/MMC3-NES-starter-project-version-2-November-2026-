@@ -47,7 +47,7 @@
 
 change_level:
 ; --------------------------------------------------
-; Disable nmi/rendering
+; Disable NMI/rendering
 ; --------------------------------------------------
   ldx #$00
   stx PPUCTRL
@@ -75,6 +75,12 @@ change_level:
 :
 
 @level_1_scene:
+; prg rom switch
+  lda #%00000110
+  sta MMC3_BANK_SELECT
+  lda #0
+  sta MMC3_BANK_DATA
+  
 ; load palette
   ldx PPUSTATUS
   ldx #$3F
@@ -89,12 +95,6 @@ change_level:
   inx
   cpx #$20
   bne :-
-
-; prg rom switch
-  lda #%00000110
-  sta MMC3_BANK_SELECT
-  lda #0
-  sta MMC3_BANK_DATA
 
 ; CHR rom switch
   lda #%00000000
@@ -148,49 +148,15 @@ change_level:
   lda #>stage1_metatiles_bottom_table
   sta metatile_bottom_ptr_hi
 
-  ldy #0
-:
-  lda (attrib_ptr), y
-  sta attrib_data, y
-  iny
-  cpy #8
-  bne :-
-
-  lda attrib_ptr_lo
-  clc
-  adc #8
-  sta attrib_ptr_lo
-  lda attrib_ptr_hi
-  adc #0
-  sta attrib_ptr_hi
-
-  lda #0
-  sta temp
-  ldx #0
-:
-  ldy temp
-  lda (tile_ptr), y
-  asl a
-  tay
-  lda (metatile_top_ptr), y
-  sta row_data, x
-  iny
-  inx
-  lda (metatile_top_ptr), y
-  sta row_data, x
-  inc temp
-  inx
-  cpx #32
-  bne :-
-
-; turn on scrolling & MMC scanline IRQ
-  lda #$01
-  ;sta do_scroll
-  sta do_irq
-
-  jmp level_loaded
+  jmp prepare_for_scrolling
 
 @level_2_scene:
+; prg rom switch
+  lda #%00000111
+  sta MMC3_BANK_SELECT
+  lda #1
+  sta MMC3_BANK_DATA
+
 ; load palette
   ldx PPUSTATUS
   ldx #$3F
@@ -205,12 +171,6 @@ change_level:
   inx
   cpx #$20
   bne :-
-
-; prg rom switch
-  lda #%00000111
-  sta MMC3_BANK_SELECT
-  lda #1
-  sta MMC3_BANK_DATA
 
 ; CHR rom switch
   lda #%00000000
@@ -264,6 +224,87 @@ change_level:
   lda #>stage2_metatiles_bottom_table
   sta metatile_bottom_ptr_hi
 
+  jmp prepare_for_scrolling
+
+@level_3_scene:
+; prg rom switch
+  lda #%00000110
+  sta MMC3_BANK_SELECT
+  lda #2
+  sta MMC3_BANK_DATA
+
+; load palette
+  ldx PPUSTATUS
+  ldx #$3F
+  stx PPUADDR
+  ldx #$00
+  stx PPUADDR
+
+  ldx #$00
+:
+  lda stage3_palette_table,x
+  sta PPUDATA
+  inx
+  cpx #$20
+  bne :-
+
+; CHR rom switch
+  lda #%00000000
+  sta MMC3_BANK_SELECT
+  lda #24
+  sta MMC3_BANK_DATA
+  
+  lda #%00000001
+  sta MMC3_BANK_SELECT
+  lda #26
+  sta MMC3_BANK_DATA
+
+  lda #%00000010
+  sta MMC3_BANK_SELECT
+  lda #28
+  sta MMC3_BANK_DATA
+
+  lda #%00000011
+  sta MMC3_BANK_SELECT
+  lda #29
+  sta MMC3_BANK_DATA
+
+  lda #%00000100
+  sta MMC3_BANK_SELECT
+  lda #30
+  sta MMC3_BANK_DATA
+
+  lda #%00000101
+  sta MMC3_BANK_SELECT
+  lda #31
+  sta MMC3_BANK_DATA
+
+; init pointers
+  lda #<stage3_screen1_table
+  sta tile_ptr_lo
+  lda #>stage3_screen1_table
+  sta tile_ptr_hi
+
+  lda #<stage3_screen1_attribs_table
+  sta attrib_ptr_lo
+  lda #>stage3_screen1_attribs_table
+  sta attrib_ptr_hi
+
+  lda #<stage3_metatiles_top_table
+  sta metatile_top_ptr_lo
+  lda #>stage3_metatiles_top_table
+  sta metatile_top_ptr_hi
+
+  lda #<stage3_metatiles_bottom_table
+  sta metatile_bottom_ptr_lo
+  lda #>stage3_metatiles_bottom_table
+  sta metatile_bottom_ptr_hi
+
+  jmp prepare_for_scrolling
+
+prepare_for_scrolling:
+
+; prepare first row of tiles
   ldy #0
 :
   lda (attrib_ptr), y
@@ -299,31 +340,17 @@ change_level:
   cpx #32
   bne :-
 
-; turn on scrolling & MMC scanline IRQ
+; start scrolling
   lda #$01
-  ;sta do_scroll
+  sta do_scroll
   sta do_irq
-
-  jmp level_loaded
-
-@level_3_scene:
-  lda #$01
-  ;sta do_scroll
-  sta do_irq
-
-  jmp level_loaded
-
-level_loaded:
 
 ; --------------------------------------------------
-; Enable sprites and background
-; draw sprites and bg on leftmost side of screen
-; NMI on, background at $1000 sprites at $0000
+; Turn on rendering
 ; --------------------------------------------------
   lda #%00011110 
   sta PPUMASK
   lda #%10001000
   sta PPUCTRL
-; --------------------------------------------------
 
   rts

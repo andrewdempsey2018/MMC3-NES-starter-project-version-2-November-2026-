@@ -55,9 +55,9 @@ palette_table:
   .byte $0F,$06,$16,$26
   .byte $0F,$09,$19,$29
 
-.include "../data/stage1_data.asm"
-.include "../data/stage2_data.asm"
-.include "../data/stage3_data.asm"
+;.include "../data/stage1_data.asm"
+;.include "../data/stage2_data.asm"
+;.include "../data/stage3_data.asm"
 .include "../data/statusbar_data.asm"
 
 .segment "FIXED_CODE1"
@@ -123,6 +123,11 @@ main:
   sta ptr_lo
   sta ptr_hi
 
+  sta metatile_top_ptr_lo
+  sta metatile_top_ptr_hi
+  sta metatile_bottom_ptr_lo
+  sta metatile_bottom_ptr_hi
+
 ; --------------------------------------------------
 ; Load status bar into nametable 01 ($2400)
 ; --------------------------------------------------
@@ -155,51 +160,6 @@ main:
 ; --------------------------------------------------
 ; start first level
 ; --------------------------------------------------
-
-  ;lda #<ScreenTest
-  ;sta tile_ptr_lo
-  ;lda #>ScreenTest
-  ;sta tile_ptr_hi
-
-  ;lda #<ScreenTestAttrib
-  ;sta attrib_ptr_lo
-  ;lda #>ScreenTestAttrib
-  ;sta attrib_ptr_hi
-
-  ldy #0
-:
-  lda (attrib_ptr), y
-  sta attrib_data, y
-  iny
-  cpy #8
-  bne :-
-
-  lda attrib_ptr_lo
-  clc
-  adc #8
-  sta attrib_ptr_lo
-  lda attrib_ptr_hi
-  adc #0
-  sta attrib_ptr_hi
-
-  lda #0
-  sta temp
-  ldx #0
-:
-  ldy temp
-  lda (tile_ptr), y
-  asl a
-  tay
-  lda (metatile_top_ptr), y
-  sta row_data, x
-  iny
-  inx
-  lda (metatile_top_ptr), y
-  sta row_data, x
-  inc temp
-  inx
-  cpx #32
-  bne :-
 
   lda #0
   sta scene_number

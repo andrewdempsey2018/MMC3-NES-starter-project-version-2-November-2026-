@@ -1,5 +1,17 @@
 .segment "CODE0"
 
+.export stage1_metatiles_top_table
+.export stage1_metatiles_bottom_table
+.export stage1_screen1_table
+.export stage1_screen1_attribs_table
+.export stage1_screen2_table
+.export stage1_screen2_attribs_table
+.export stage1_sequence_hi_table
+.export stage1_sequence_lo_table
+.export stage1_attribs_sequence_hi_table
+.export stage1_attribs_sequence_lo_table
+.export stage1_palette_table
+
 stage1_metatiles_top_table:
   .byte $00,$00
   .byte $02,$03
@@ -8,7 +20,7 @@ stage1_metatiles_bottom_table:
   .byte $00,$00
   .byte $12,$13
 
-stage1_screen_table:
+stage1_screen1_table:
   .byte $01,$01,$01,$01,$01,$01,$01,$01,$01,$01,$01,$01,$01,$01,$01,$01
   .byte $01,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$01
   .byte $01,$00,$00,$00,$00,$00,$00,$01,$00,$00,$00,$00,$00,$00,$00,$01
@@ -25,7 +37,7 @@ stage1_screen_table:
   .byte $01,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$01
   .byte $01,$01,$01,$01,$01,$01,$01,$01,$01,$01,$01,$01,$01,$01,$01,$01
 
-stage1_screen_attribs_table:
+stage1_screen1_attribs_table:
   .byte $00,$55,$AA,$FF,$00,$55,$AA,$FF
   .byte $55,$AA,$FF,$00,$55,$AA,$FF,$00
   .byte $00,$55,$AA,$FF,$00,$55,$AA,$FF
@@ -63,17 +75,17 @@ stage1_screen2_attribs_table:
   .byte $55,$AA,$FF,$00,$55,$AA,$FF,$00
 
 stage1_sequence_hi_table:
-  .byte >stage1_screen_table,>stage1_screen2_table,>stage1_screen_table,>stage1_screen2_table,>stage1_screen_table
-  .byte >stage1_screen2_table,>stage1_screen_table,>stage1_screen2_table,>stage1_screen_table,>stage1_screen2_table
+  .byte >stage1_screen1_table,>stage1_screen2_table,>stage1_screen1_table,>stage1_screen2_table,>stage1_screen1_table
+  .byte >stage1_screen2_table,>stage1_screen1_table,>stage1_screen2_table,>stage1_screen1_table,>stage1_screen2_table
 stage1_sequence_lo_table:
-  .byte <stage1_screen_table,<stage1_screen2_table,<stage1_screen_table,<stage1_screen2_table,<stage1_screen_table
-  .byte <stage1_screen2_table,<stage1_screen_table,<stage1_screen2_table,<stage1_screen_table,<stage1_screen2_table
+  .byte <stage1_screen1_table,<stage1_screen2_table,<stage1_screen1_table,<stage1_screen2_table,<stage1_screen1_table
+  .byte <stage1_screen2_table,<stage1_screen1_table,<stage1_screen2_table,<stage1_screen1_table,<stage1_screen2_table
 stage1_attribs_sequence_hi_table:
-  .byte >stage1_screen_attribs_table,>stage1_screen2_attribs_table,>stage1_screen_attribs_table,>stage1_screen2_attribs_table,>stage1_screen_attribs_table
-  .byte >stage1_screen2_attribs_table,>stage1_screen_attribs_table,>stage1_screen2_attribs_table,>stage1_screen_attribs_table,>stage1_screen2_attribs_table
+  .byte >stage1_screen1_attribs_table,>stage1_screen2_attribs_table,>stage1_screen1_attribs_table,>stage1_screen2_attribs_table,>stage1_screen1_attribs_table
+  .byte >stage1_screen2_attribs_table,>stage1_screen1_attribs_table,>stage1_screen2_attribs_table,>stage1_screen1_attribs_table,>stage1_screen2_attribs_table
 stage1_attribs_sequence_lo_table:
-  .byte <stage1_screen_attribs_table,<stage1_screen2_attribs_table,<stage1_screen_attribs_table,<stage1_screen2_attribs_table,<stage1_screen_attribs_table
-  .byte <stage1_screen2_attribs_table,<stage1_screen_attribs_table,<stage1_screen2_attribs_table,<stage1_screen_attribs_table,<stage1_screen2_attribs_table
+  .byte <stage1_screen1_attribs_table,<stage1_screen2_attribs_table,<stage1_screen1_attribs_table,<stage1_screen2_attribs_table,<stage1_screen1_attribs_table
+  .byte <stage1_screen2_attribs_table,<stage1_screen1_attribs_table,<stage1_screen2_attribs_table,<stage1_screen1_attribs_table,<stage1_screen2_attribs_table
 
 stage1_palette_table:
   .byte $21,$07,$17,$27 ; bg

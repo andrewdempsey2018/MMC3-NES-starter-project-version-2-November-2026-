@@ -11,11 +11,39 @@
 ;
 ; --------------------------------------------------
 
-;.segment "RODATA"
-
-
-
 .segment "FIXED_CODE1"
+
+.import stage1_metatiles_top_table
+.import stage1_metatiles_bottom_table
+.import stage1_screen1_table
+.import stage1_screen1_attribs_table
+.import stage1_screen2_table
+.import stage1_screen2_attribs_table
+.import stage1_sequence_hi_table
+.import stage1_sequence_lo_table
+.import stage1_attribs_sequence_hi_table
+.import stage1_attribs_sequence_lo_table
+.import stage1_palette_table
+
+.import stage2_metatiles_top_table
+.import stage2_metatiles_bottom_table
+.import stage2_screen1_table
+.import stage2_screen1_attribs_table
+.import stage2_sequence_hi_table
+.import stage2_sequence_lo_table
+.import stage2_attribs_sequence_hi_table
+.import stage2_attribs_sequence_lo_table
+.import stage2_palette_table
+
+.import stage3_metatiles_top_table
+.import stage3_metatiles_bottom_table
+.import stage3_screen1_table
+.import stage3_screen1_attribs_table
+.import stage3_sequence_hi_table
+.import stage3_sequence_lo_table
+.import stage3_attribs_sequence_hi_table
+.import stage3_attribs_sequence_lo_table
+.import stage3_palette_table
 
 change_level:
 ; --------------------------------------------------
@@ -85,35 +113,60 @@ change_level:
   sta MMC3_BANK_DATA
 
 ; init pointers
-  ;lda #<stage1_sequence_lo_table
-  ;sta screens_sequence_lo_ptr
-  ;lda #>stage1_sequence_lo_table
-  ;sta screens_sequence_lo_ptr + 1
+  lda #<stage1_screen1_table
+  sta tile_ptr_lo
+  lda #>stage1_screen1_table
+  sta tile_ptr_hi
 
-  ;lda #<stage1_sequence_hi_table
-  ;sta screens_sequence_hi_ptr
-  ;lda #>stage1_sequence_hi_table
-  ;sta screens_sequence_hi_ptr + 1
+  lda #<stage1_screen1_attribs_table
+  sta attrib_ptr_lo
+  lda #>stage1_screen1_attribs_table
+  sta attrib_ptr_hi
 
-  ;lda #<stage1_attribs_sequence_lo_table
-  ;sta attribs_sequence_lo_ptr
-  ;lda #>stage1_attribs_sequence_lo_table
-  ;sta attribs_sequence_lo_ptr + 1
+  lda #<stage1_metatiles_top_table
+  sta metatile_top_ptr_lo
+  lda #>stage1_metatiles_top_table
+  sta metatile_top_ptr_hi
 
-  ;lda #<stage1_attribs_sequence_hi_table
-  ;sta attribs_sequence_hi_ptr
-  ;lda #>stage1_attribs_sequence_hi_table
-  ;sta attribs_sequence_hi_ptr + 1
+  lda #<stage1_metatiles_bottom_table
+  sta metatile_bottom_ptr_lo
+  lda #>stage1_metatiles_bottom_table
+  sta metatile_bottom_ptr_hi
 
-  ;lda #<stage1_metatiles_top_table
-  ;sta metatiles_top_ptr
-  ;lda #>stage1_metatiles_top_table
-  ;sta metatiles_top_ptr + 1
+  ldy #0
+:
+  lda (attrib_ptr), y
+  sta attrib_data, y
+  iny
+  cpy #8
+  bne :-
 
-  ;lda #<stage1_metatiles_bottom_table
-  ;sta metatiles_bottom_ptr
-  ;lda #>stage1_metatiles_bottom_table
-  ;sta metatiles_bottom_ptr + 1
+  lda attrib_ptr_lo
+  clc
+  adc #8
+  sta attrib_ptr_lo
+  lda attrib_ptr_hi
+  adc #0
+  sta attrib_ptr_hi
+
+  lda #0
+  sta temp
+  ldx #0
+:
+  ldy temp
+  lda (tile_ptr), y
+  asl a
+  tay
+  lda (metatile_top_ptr), y
+  sta row_data, x
+  iny
+  inx
+  lda (metatile_top_ptr), y
+  sta row_data, x
+  inc temp
+  inx
+  cpx #32
+  bne :-
 
 ; turn on scrolling & MMC scanline IRQ
   lda #$01

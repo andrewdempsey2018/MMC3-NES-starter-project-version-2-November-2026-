@@ -198,12 +198,21 @@ main_loop:
   lda buttons_pressed
   and #BTN_START
   beq finished_updating_scene
-  lda #$02
+  lda #$01
   sta scene_number
   jsr change_level
   jmp finished_updating_scene
 
 @level_2_scene:
+  lda buttons_pressed
+  and #BTN_START
+  beq finished_updating_scene
+  lda #$02
+  sta scene_number
+  jsr change_level
+  jmp finished_updating_scene
+
+@level_3_scene:
   ; do stuff
   jmp finished_updating_scene
 

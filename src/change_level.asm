@@ -75,6 +75,21 @@ change_level:
 :
 
 @level_1_scene:
+; load palette
+  ldx PPUSTATUS
+  ldx #$3F
+  stx PPUADDR
+  ldx #$00
+  stx PPUADDR
+
+  ldx #$00
+:
+  lda stage1_palette_table,x
+  sta PPUDATA
+  inx
+  cpx #$20
+  bne :-
+
 ; prg rom switch
   lda #%00000110
   sta MMC3_BANK_SELECT
@@ -176,13 +191,28 @@ change_level:
   jmp level_loaded
 
 @level_2_scene:
+; load palette
+  ldx PPUSTATUS
+  ldx #$3F
+  stx PPUADDR
+  ldx #$00
+  stx PPUADDR
+
+  ldx #$00
+:
+  lda stage2_palette_table,x
+  sta PPUDATA
+  inx
+  cpx #$20
+  bne :-
+
 ; prg rom switch
   lda #%00000111
   sta MMC3_BANK_SELECT
   lda #1
   sta MMC3_BANK_DATA
 
-; change chr
+; CHR rom switch
   lda #%00000000
   sta MMC3_BANK_SELECT
   lda #16
@@ -214,35 +244,60 @@ change_level:
   sta MMC3_BANK_DATA
 
 ; init pointers
-  ;lda #<stage2_sequence_lo_table
-  ;sta screens_sequence_lo_ptr
-  ;lda #>stage2_sequence_lo_table
-  ;sta screens_sequence_lo_ptr + 1
+  lda #<stage2_screen1_table
+  sta tile_ptr_lo
+  lda #>stage2_screen1_table
+  sta tile_ptr_hi
 
-  ;lda #<stage2_sequence_hi_table
-  ;sta screens_sequence_hi_ptr
-  ;lda #>stage2_sequence_hi_table
-  ;sta screens_sequence_hi_ptr + 1
+  lda #<stage2_screen1_attribs_table
+  sta attrib_ptr_lo
+  lda #>stage2_screen1_attribs_table
+  sta attrib_ptr_hi
 
-  ;lda #<stage2_attribs_sequence_lo_table
-  ;sta attribs_sequence_lo_ptr
-  ;lda #>stage2_attribs_sequence_lo_table
-  ;sta attribs_sequence_lo_ptr + 1
+  lda #<stage2_metatiles_top_table
+  sta metatile_top_ptr_lo
+  lda #>stage2_metatiles_top_table
+  sta metatile_top_ptr_hi
 
-  ;lda #<stage2_attribs_sequence_hi_table
-  ;sta attribs_sequence_hi_ptr
-  ;lda #>stage2_attribs_sequence_hi_table
-  ;sta attribs_sequence_hi_ptr + 1
+  lda #<stage2_metatiles_bottom_table
+  sta metatile_bottom_ptr_lo
+  lda #>stage2_metatiles_bottom_table
+  sta metatile_bottom_ptr_hi
 
-  ;lda #<stage2_metatiles_top_table
-  ;sta metatiles_top_ptr
-  ;lda #>stage2_metatiles_top_table
-  ;sta metatiles_top_ptr + 1
+  ldy #0
+:
+  lda (attrib_ptr), y
+  sta attrib_data, y
+  iny
+  cpy #8
+  bne :-
 
-  ;lda #<stage2_metatiles_bottom_table
-  ;sta metatiles_bottom_ptr
-  ;lda #>stage2_metatiles_bottom_table
-  ;sta metatiles_bottom_ptr + 1
+  lda attrib_ptr_lo
+  clc
+  adc #8
+  sta attrib_ptr_lo
+  lda attrib_ptr_hi
+  adc #0
+  sta attrib_ptr_hi
+
+  lda #0
+  sta temp
+  ldx #0
+:
+  ldy temp
+  lda (tile_ptr), y
+  asl a
+  tay
+  lda (metatile_top_ptr), y
+  sta row_data, x
+  iny
+  inx
+  lda (metatile_top_ptr), y
+  sta row_data, x
+  inc temp
+  inx
+  cpx #32
+  bne :-
 
 ; turn on scrolling & MMC scanline IRQ
   lda #$01

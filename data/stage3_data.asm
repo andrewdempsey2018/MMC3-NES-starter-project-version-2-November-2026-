@@ -55,12 +55,12 @@ stage3_attribs_sequence_lo_table:
   .byte <stage3_screen1_attribs_table,<stage3_screen1_attribs_table,<stage3_screen1_attribs_table,<stage3_screen1_attribs_table,<stage3_screen1_attribs_table
 
 stage3_palette_table:
-  .byte $21,$07,$17,$27 ; bg
-  .byte $21,$0f,$22,$20
-  .byte $21,$04,$14,$34
-  .byte $21,$19,$29,$39
+  .byte $0F,$15,$25,$35
+  .byte $0F,$16,$26,$36
+  .byte $0F,$17,$27,$37
+  .byte $0F,$18,$28,$38
 
-  .byte $21,$00,$10,$20 ; sprites
-  .byte $21,$09,$1a,$3a
-  .byte $21,$17,$27,$38
-  .byte $21,$15,$25,$35
+  .byte $0F,$15,$25,$35
+  .byte $0F,$16,$26,$36
+  .byte $0F,$17,$27,$37
+  .byte $0F,$18,$28,$38

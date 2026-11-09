@@ -4,9 +4,9 @@ main.o:
     RODATA            Offs=000000  Size=00047A  Align=00001  Fill=0000
     BSS               Offs=000000  Size=000028  Align=00001  Fill=0000
     ZEROPAGE          Offs=000000  Size=000015  Align=00001  Fill=0000
-    FIXED_CODE1       Offs=000000  Size=0002A1  Align=00001  Fill=0000
+    FIXED_CODE1       Offs=000000  Size=00032D  Align=00001  Fill=0000
     HEADER            Offs=000000  Size=000010  Align=00001  Fill=0000
-    FIXED_CODE0       Offs=000000  Size=000186  Align=00001  Fill=0000
+    FIXED_CODE0       Offs=000000  Size=000196  Align=00001  Fill=0000
     VECTORS           Offs=000000  Size=000006  Align=00001  Fill=0000
     CHR_ROM           Offs=000000  Size=008000  Align=00001  Fill=0000
 stage1_data.o:
@@ -28,16 +28,19 @@ BSS                   000300  000327  000028  00001
 CODE0                 008000  0082AF  0002B0  00001
 CODE2                 008000  00816B  00016C  00001
 CODE1                 00A000  00A16B  00016C  00001
-FIXED_CODE0           00C000  00C185  000186  00001
-FIXED_CODE1           00E000  00E2A0  0002A1  00001
-RODATA                00E300  00E779  00047A  00001
+FIXED_CODE0           00C000  00C195  000196  00001
+FIXED_CODE1           00E000  00E32C  00032D  00001
+RODATA                00E400  00E879  00047A  00001
 VECTORS               00FFFA  00FFFF  000006  00001
 
 
 Exports list by name:
 ---------------------
 stage1_metatiles_bottom_table 008004 RLA    stage1_metatiles_top_table 008000 RLA    
-stage1_screen1_attribs_table 0080F8 RLA    stage1_screen1_table      008008 RLA    
+stage1_palette_table      008290 RLA    stage1_screen1_attribs_table 0080F8 RLA    
+stage1_screen1_table      008008 RLA    stage2_metatiles_bottom_table 00A004 RLA    
+stage2_metatiles_top_table 00A000 RLA    stage2_palette_table      00A14C RLA    
+stage2_screen1_attribs_table 00A0F8 RLA    stage2_screen1_table      00A008 RLA    
 
 
 
@@ -45,6 +48,9 @@ Exports list by value:
 ----------------------
 stage1_metatiles_top_table 008000 RLA    stage1_metatiles_bottom_table 008004 RLA    
 stage1_screen1_table      008008 RLA    stage1_screen1_attribs_table 0080F8 RLA    
+stage1_palette_table      008290 RLA    stage2_metatiles_top_table 00A000 RLA    
+stage2_metatiles_bottom_table 00A004 RLA    stage2_screen1_table      00A008 RLA    
+stage2_screen1_attribs_table 00A0F8 RLA    stage2_palette_table      00A14C RLA    
 
 
 
@@ -54,8 +60,20 @@ stage1_metatiles_bottom_table (stage1_data.o):
     main.o                    src/change_level.asm:17
 stage1_metatiles_top_table (stage1_data.o):
     main.o                    src/change_level.asm:16
+stage1_palette_table (stage1_data.o):
+    main.o                    src/change_level.asm:26
 stage1_screen1_attribs_table (stage1_data.o):
     main.o                    src/change_level.asm:19
 stage1_screen1_table (stage1_data.o):
     main.o                    src/change_level.asm:18
+stage2_metatiles_bottom_table (stage2_data.o):
+    main.o                    src/change_level.asm:29
+stage2_metatiles_top_table (stage2_data.o):
+    main.o                    src/change_level.asm:28
+stage2_palette_table (stage2_data.o):
+    main.o                    src/change_level.asm:36
+stage2_screen1_attribs_table (stage2_data.o):
+    main.o                    src/change_level.asm:31
+stage2_screen1_table (stage2_data.o):
+    main.o                    src/change_level.asm:30
 

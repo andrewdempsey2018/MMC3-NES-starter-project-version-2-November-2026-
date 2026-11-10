@@ -73,57 +73,57 @@ stage2_palette_table      00A14C RLA
 Imports list:
 -------------
 stage1_attribs_sequence_hi_table (stage1_data.o):
-    main.o                    src/change_level.asm:24
+    main.o                    src/load_gameplay_level.asm:24
 stage1_attribs_sequence_lo_table (stage1_data.o):
-    main.o                    src/change_level.asm:25
+    main.o                    src/load_gameplay_level.asm:25
 stage1_metatiles_bottom_table (stage1_data.o):
-    main.o                    src/change_level.asm:17
+    main.o                    src/load_gameplay_level.asm:17
 stage1_metatiles_top_table (stage1_data.o):
-    main.o                    src/change_level.asm:16
+    main.o                    src/load_gameplay_level.asm:16
 stage1_palette_table (stage1_data.o):
-    main.o                    src/change_level.asm:26
+    main.o                    src/load_gameplay_level.asm:26
 stage1_screen1_attribs_table (stage1_data.o):
-    main.o                    src/change_level.asm:19
+    main.o                    src/load_gameplay_level.asm:19
 stage1_screen1_table (stage1_data.o):
-    main.o                    src/change_level.asm:18
+    main.o                    src/load_gameplay_level.asm:18
 stage1_sequence_hi_table (stage1_data.o):
-    main.o                    src/change_level.asm:22
+    main.o                    src/load_gameplay_level.asm:22
 stage1_sequence_lo_table (stage1_data.o):
-    main.o                    src/change_level.asm:23
+    main.o                    src/load_gameplay_level.asm:23
 stage2_attribs_sequence_hi_table (stage2_data.o):
-    main.o                    src/change_level.asm:34
+    main.o                    src/load_gameplay_level.asm:34
 stage2_attribs_sequence_lo_table (stage2_data.o):
-    main.o                    src/change_level.asm:35
+    main.o                    src/load_gameplay_level.asm:35
 stage2_metatiles_bottom_table (stage2_data.o):
-    main.o                    src/change_level.asm:29
+    main.o                    src/load_gameplay_level.asm:29
 stage2_metatiles_top_table (stage2_data.o):
-    main.o                    src/change_level.asm:28
+    main.o                    src/load_gameplay_level.asm:28
 stage2_palette_table (stage2_data.o):
-    main.o                    src/change_level.asm:36
+    main.o                    src/load_gameplay_level.asm:36
 stage2_screen1_attribs_table (stage2_data.o):
-    main.o                    src/change_level.asm:31
+    main.o                    src/load_gameplay_level.asm:31
 stage2_screen1_table (stage2_data.o):
-    main.o                    src/change_level.asm:30
+    main.o                    src/load_gameplay_level.asm:30
 stage2_sequence_hi_table (stage2_data.o):
-    main.o                    src/change_level.asm:32
+    main.o                    src/load_gameplay_level.asm:32
 stage2_sequence_lo_table (stage2_data.o):
-    main.o                    src/change_level.asm:33
+    main.o                    src/load_gameplay_level.asm:33
 stage3_attribs_sequence_hi_table (stage3_data.o):
-    main.o                    src/change_level.asm:44
+    main.o                    src/load_gameplay_level.asm:44
 stage3_attribs_sequence_lo_table (stage3_data.o):
-    main.o                    src/change_level.asm:45
+    main.o                    src/load_gameplay_level.asm:45
 stage3_metatiles_bottom_table (stage3_data.o):
-    main.o                    src/change_level.asm:39
+    main.o                    src/load_gameplay_level.asm:39
 stage3_metatiles_top_table (stage3_data.o):
-    main.o                    src/change_level.asm:38
+    main.o                    src/load_gameplay_level.asm:38
 stage3_palette_table (stage3_data.o):
-    main.o                    src/change_level.asm:46
+    main.o                    src/load_gameplay_level.asm:46
 stage3_screen1_attribs_table (stage3_data.o):
-    main.o                    src/change_level.asm:41
+    main.o                    src/load_gameplay_level.asm:41
 stage3_screen1_table (stage3_data.o):
-    main.o                    src/change_level.asm:40
+    main.o                    src/load_gameplay_level.asm:40
 stage3_sequence_hi_table (stage3_data.o):
-    main.o                    src/change_level.asm:42
+    main.o                    src/load_gameplay_level.asm:42
 stage3_sequence_lo_table (stage3_data.o):
-    main.o                    src/change_level.asm:43
+    main.o                    src/load_gameplay_level.asm:43
 

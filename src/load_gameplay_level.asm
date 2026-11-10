@@ -45,7 +45,7 @@
 .import stage3_attribs_sequence_lo_table
 .import stage3_palette_table
 
-change_level:
+load_gameplay_level:
 ; --------------------------------------------------
 ; Disable NMI/rendering
 ; --------------------------------------------------

@@ -76,7 +76,7 @@ palette_table:
 .include "nmi.asm"
 .include "irq.asm"
 .include "controllers.asm"
-.include "change_level.asm"
+.include "load_gameplay_level.asm"
 .include "prepare_row.asm"
 .include "draw_row.asm"
 .include "clear_nametable.asm"
@@ -182,7 +182,7 @@ main:
 
   lda #0
   sta scene_number
-  jsr change_level
+  jsr load_gameplay_level
 
 ; --------------------------------------------------
 ; Enable maskable interrupts
@@ -221,7 +221,7 @@ main_loop:
   beq finished_updating_scene
   lda #$01
   sta scene_number
-  jsr change_level
+  jsr load_gameplay_level
   jmp finished_updating_scene
 
 @level_2_scene:
@@ -230,7 +230,7 @@ main_loop:
   beq finished_updating_scene
   lda #$02
   sta scene_number
-  jsr change_level
+  jsr load_gameplay_level
   jmp finished_updating_scene
 
 @level_3_scene:

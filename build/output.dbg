@@ -1,6 +1,6 @@
 version	major=2,minor=0
 info	csym=0,file=20,lib=0,line=1122,mod=4,scope=5,seg=17,span=971,sym=164,type=8
-file	id=0,name="src/main.asm",size=6363,mtime=0x6AF323D3,mod=0
+file	id=0,name="src/main.asm",size=6391,mtime=0x6AF32588,mod=0
 file	id=1,name="src/../data/statusbar_data.asm",size=4709,mtime=0x6AF0169E,mod=0
 file	id=2,name="src/header.asm",size=548,mtime=0x6A8E7EB6,mod=0
 file	id=3,name="src/macros.asm",size=218,mtime=0x6A89EA98,mod=0
@@ -9,7 +9,7 @@ file	id=5,name="src/reset.asm",size=2500,mtime=0x6ABB60E4,mod=0
 file	id=6,name="src/nmi.asm",size=2875,mtime=0x6AF21415,mod=0
 file	id=7,name="src/irq.asm",size=1247,mtime=0x6ADF1840,mod=0
 file	id=8,name="src/controllers.asm",size=725,mtime=0x6ABB60E4,mod=0
-file	id=9,name="src/change_level.asm",size=8246,mtime=0x6AF324C0,mod=0
+file	id=9,name="src/load_gameplay_level.asm",size=8253,mtime=0x6AF3257D,mod=0
 file	id=10,name="src/prepare_row.asm",size=1765,mtime=0x6AF3240C,mod=0
 file	id=11,name="src/draw_row.asm",size=1179,mtime=0x6AF0966C,mod=0
 file	id=12,name="src/clear_nametable.asm",size=663,mtime=0x6AF3061F,mod=0
@@ -2164,7 +2164,7 @@ sym	id=21,name="@level_3_scene",addrsize=absolute,parent=25,def=330,ref=223,val=
 sym	id=22,name="@level_2_scene",addrsize=absolute,parent=25,def=726,ref=482,val=0xE24B,seg=6,type=lab
 sym	id=23,name="@level_1_scene",addrsize=absolute,parent=25,def=251,ref=830,val=0xE1A8,seg=6,type=lab
 sym	id=24,name="clear_nametable",addrsize=absolute,scope=0,def=465,ref=272,val=0xE3DA,seg=6,type=lab
-sym	id=25,name="change_level",addrsize=absolute,scope=0,def=748,ref=689+2+720,val=0xE176,seg=6,type=lab
+sym	id=25,name="load_gameplay_level",addrsize=absolute,scope=0,def=748,ref=689+2+720,val=0xE176,seg=6,type=lab
 sym	id=26,name="stage3_palette_table",addrsize=absolute,scope=0,def=332,ref=168,type=imp,exp=155
 sym	id=27,name="stage3_attribs_sequence_lo_table",addrsize=absolute,scope=0,def=93,ref=333+672,type=imp,exp=156
 sym	id=28,name="stage3_attribs_sequence_hi_table",addrsize=absolute,scope=0,def=301,ref=388+501,type=imp,exp=157

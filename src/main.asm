@@ -105,7 +105,7 @@ main:
 
   ldx #$00
 :
-  lda palette_table, x
+  lda palette_table,x
   sta PPUDATA
   inx
   cpx #$20
@@ -172,7 +172,7 @@ main:
   ldy #$00
 
 :
-  lda (ptr), y
+  lda (ptr),y
   sta PPUDATA
   iny
   cpy #0

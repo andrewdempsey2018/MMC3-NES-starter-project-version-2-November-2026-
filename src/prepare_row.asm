@@ -13,15 +13,15 @@ prepare_row:
 
 ; tiles
   ldy sequence_index
-  lda (screens_sequence_lo_ptr), y
+  lda (screens_sequence_lo_ptr),y
   sta tile_ptr_lo
-  lda (screens_sequence_hi_ptr), y
+  lda (screens_sequence_hi_ptr),y
   sta tile_ptr_hi
 
 ; attribs
-  lda (attribs_sequence_lo_ptr), y
+  lda (attribs_sequence_lo_ptr),y
   sta attrib_ptr_lo
-  lda (attribs_sequence_hi_ptr), y
+  lda (attribs_sequence_hi_ptr),y
   sta attrib_ptr_hi
 ; sequence <<<
 
@@ -42,8 +42,8 @@ dont_reset_row_number:
   ;; add some test data to attribs for now, delete this>>>>
   ldy #0
 :
-  lda (attrib_ptr), y
-  sta attrib_data, y
+  lda (attrib_ptr),y
+  sta attrib_data,y
   iny
   cpy #8
   bne :-
@@ -65,15 +65,15 @@ is_odd:
   ldx #0
 :
   ldy temp
-  lda (tile_ptr), y
+  lda (tile_ptr),y
   asl a
   tay
-  lda (metatile_bottom_ptr), y
-  sta row_data, x
+  lda (metatile_bottom_ptr),y
+  sta row_data,x
   iny
   inx
-  lda (metatile_bottom_ptr), y
-  sta row_data, x
+  lda (metatile_bottom_ptr),y
+  sta row_data,x
   inc temp
   inx
   cpx #32
@@ -95,15 +95,15 @@ is_even:
   ldx #0
 :
   ldy temp
-  lda (tile_ptr), y
+  lda (tile_ptr),y
   asl a
   tay
-  lda (metatile_top_ptr), y
-  sta row_data, x
+  lda (metatile_top_ptr),y
+  sta row_data,x
   iny
   inx
-  lda (metatile_top_ptr), y
-  sta row_data, x
+  lda (metatile_top_ptr),y
+  sta row_data,x
   inc temp
   inx
   cpx #32

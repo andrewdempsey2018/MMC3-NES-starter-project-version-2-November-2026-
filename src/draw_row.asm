@@ -20,12 +20,12 @@ draw_row:
   lda PPUSTATUS
   lda #$23 ; high byte of attribs address for this nametable
   sta PPUADDR
-  lda attribs_address_lo_table, x
+  lda attribs_address_lo_table,x
   sta PPUADDR
 
   ldx #$00
 :
-  lda attrib_data, x
+  lda attrib_data,x
   sta PPUDATA
   inx
   cpx #8
@@ -40,14 +40,14 @@ dont_draw_attribs:
   ldx row_number
 
   lda PPUSTATUS
-  lda row_address_hi_table, x
+  lda row_address_hi_table,x
   sta PPUADDR
-  lda row_address_lo_table, x
+  lda row_address_lo_table,x
   sta PPUADDR
 
   ldx #$00
 :
-  lda row_data, x
+  lda row_data,x
   sta PPUDATA
   inx
   cpx #32

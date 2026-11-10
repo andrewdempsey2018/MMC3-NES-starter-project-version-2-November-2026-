@@ -164,8 +164,8 @@ ldy #$00
 ; prepare first row of tiles
   ldy #0
 :
-  lda (attrib_ptr), y
-  sta attrib_data, y
+  lda (attrib_ptr),y
+  sta attrib_data,y
   iny
   cpy #8
   bne :-
@@ -183,15 +183,15 @@ ldy #$00
   ldx #0
 :
   ldy temp
-  lda (tile_ptr), y
+  lda (tile_ptr),y
   asl a
   tay
-  lda (metatile_top_ptr), y
-  sta row_data, x
+  lda (metatile_top_ptr),y
+  sta row_data,x
   iny
   inx
-  lda (metatile_top_ptr), y
-  sta row_data, x
+  lda (metatile_top_ptr),y
+  sta row_data,x
   inc temp
   inx
   cpx #32

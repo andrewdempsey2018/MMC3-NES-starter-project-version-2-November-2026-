@@ -2,10 +2,6 @@
 
 .export stage1_metatiles_top_table
 .export stage1_metatiles_bottom_table
-.export stage1_screen1_table
-.export stage1_screen1_attribs_table
-.export stage1_screen2_table
-.export stage1_screen2_attribs_table
 .export stage1_sequence_hi_table
 .export stage1_sequence_lo_table
 .export stage1_attribs_sequence_hi_table

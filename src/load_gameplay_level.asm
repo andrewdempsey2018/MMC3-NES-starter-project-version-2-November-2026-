@@ -15,10 +15,6 @@
 
 .import stage1_metatiles_top_table
 .import stage1_metatiles_bottom_table
-.import stage1_screen1_table
-.import stage1_screen1_attribs_table
-.import stage1_screen2_table
-.import stage1_screen2_attribs_table
 .import stage1_sequence_hi_table
 .import stage1_sequence_lo_table
 .import stage1_attribs_sequence_hi_table
@@ -27,8 +23,6 @@
 
 .import stage2_metatiles_top_table
 .import stage2_metatiles_bottom_table
-.import stage2_screen1_table
-.import stage2_screen1_attribs_table
 .import stage2_sequence_hi_table
 .import stage2_sequence_lo_table
 .import stage2_attribs_sequence_hi_table
@@ -37,8 +31,6 @@
 
 .import stage3_metatiles_top_table
 .import stage3_metatiles_bottom_table
-.import stage3_screen1_table
-.import stage3_screen1_attribs_table
 .import stage3_sequence_hi_table
 .import stage3_sequence_lo_table
 .import stage3_attribs_sequence_hi_table
@@ -131,16 +123,6 @@ load_gameplay_level:
   sta MMC3_BANK_DATA
 
 ; init pointers
-  lda #<stage1_screen1_table
-  sta tile_ptr_lo
-  lda #>stage1_screen1_table
-  sta tile_ptr_hi
-
-  lda #<stage1_screen1_attribs_table
-  sta attrib_ptr_lo
-  lda #>stage1_screen1_attribs_table
-  sta attrib_ptr_hi
-
   lda #<stage1_metatiles_top_table
   sta metatile_top_ptr_lo
   lda #>stage1_metatiles_top_table
@@ -227,16 +209,6 @@ load_gameplay_level:
   sta MMC3_BANK_DATA
 
 ; init pointers
-  lda #<stage2_screen1_table
-  sta tile_ptr_lo
-  lda #>stage2_screen1_table
-  sta tile_ptr_hi
-
-  lda #<stage2_screen1_attribs_table
-  sta attrib_ptr_lo
-  lda #>stage2_screen1_attribs_table
-  sta attrib_ptr_hi
-
   lda #<stage2_metatiles_top_table
   sta metatile_top_ptr_lo
   lda #>stage2_metatiles_top_table
@@ -323,16 +295,6 @@ load_gameplay_level:
   sta MMC3_BANK_DATA
 
 ; init pointers
-  lda #<stage3_screen1_table
-  sta tile_ptr_lo
-  lda #>stage3_screen1_table
-  sta tile_ptr_hi
-
-  lda #<stage3_screen1_attribs_table
-  sta attrib_ptr_lo
-  lda #>stage3_screen1_attribs_table
-  sta attrib_ptr_hi
-
   lda #<stage3_metatiles_top_table
   sta metatile_top_ptr_lo
   lda #>stage3_metatiles_top_table
@@ -366,6 +328,16 @@ load_gameplay_level:
   jmp prepare_for_scrolling
 
 prepare_for_scrolling:
+ldy #$00
+  lda (screens_sequence_lo_ptr),y
+  sta tile_ptr_lo
+  lda (screens_sequence_hi_ptr),y
+  sta tile_ptr_hi
+
+  lda (attribs_sequence_lo_ptr),y
+  sta attrib_ptr_lo
+  lda (attribs_sequence_hi_ptr),y
+  sta attrib_ptr_hi
 
 ; prepare first row of tiles
   ldy #0

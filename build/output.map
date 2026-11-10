@@ -4,7 +4,7 @@ main.o:
     RODATA            Offs=000000  Size=00047A  Align=00001  Fill=0000
     BSS               Offs=000000  Size=000028  Align=00001  Fill=0000
     ZEROPAGE          Offs=000000  Size=00001F  Align=00001  Fill=0000
-    FIXED_CODE1       Offs=000000  Size=0004E2  Align=00001  Fill=0000
+    FIXED_CODE1       Offs=000000  Size=0004C4  Align=00001  Fill=0000
     HEADER            Offs=000000  Size=000010  Align=00001  Fill=0000
     FIXED_CODE0       Offs=000000  Size=0000E3  Align=00001  Fill=0000
     VECTORS           Offs=000000  Size=000006  Align=00001  Fill=0000
@@ -29,7 +29,7 @@ CODE0                 008000  0082AF  0002B0  00001
 CODE2                 008000  00816B  00016C  00001
 CODE1                 00A000  00A16B  00016C  00001
 FIXED_CODE0           00C000  00C0E2  0000E3  00001
-FIXED_CODE1           00E000  00E4E1  0004E2  00001
+FIXED_CODE1           00E000  00E4C3  0004C4  00001
 RODATA                00E500  00E979  00047A  00001
 VECTORS               00FFFA  00FFFF  000006  00001
 
@@ -38,33 +38,27 @@ Exports list by name:
 ---------------------
 stage1_attribs_sequence_hi_table 00827C RLA    stage1_attribs_sequence_lo_table 008286 RLA    
 stage1_metatiles_bottom_table 008004 RLA    stage1_metatiles_top_table 008000 RLA    
-stage1_palette_table      008290 RLA    stage1_screen1_attribs_table 0080F8 RLA    
-stage1_screen1_table      008008 RLA    stage1_sequence_hi_table  008268 RLA    
+stage1_palette_table      008290 RLA    stage1_sequence_hi_table  008268 RLA    
 stage1_sequence_lo_table  008272 RLA    stage2_attribs_sequence_hi_table 00A142 RLA    
 stage2_attribs_sequence_lo_table 00A147 RLA    stage2_metatiles_bottom_table 00A004 RLA    
 stage2_metatiles_top_table 00A000 RLA    stage2_palette_table      00A14C RLA    
-stage2_screen1_attribs_table 00A0F8 RLA    stage2_screen1_table      00A008 RLA    
 stage2_sequence_hi_table  00A138 RLA    stage2_sequence_lo_table  00A13D RLA    
 stage3_attribs_sequence_hi_table 008142 RLA    stage3_attribs_sequence_lo_table 008147 RLA    
 stage3_metatiles_bottom_table 008004 RLA    stage3_metatiles_top_table 008000 RLA    
-stage3_palette_table      00814C RLA    stage3_screen1_attribs_table 0080F8 RLA    
-stage3_screen1_table      008008 RLA    stage3_sequence_hi_table  008138 RLA    
+stage3_palette_table      00814C RLA    stage3_sequence_hi_table  008138 RLA    
 stage3_sequence_lo_table  00813D RLA    
 
 
 Exports list by value:
 ----------------------
-stage3_metatiles_top_table 008000 RLA    stage1_metatiles_top_table 008000 RLA    
+stage1_metatiles_top_table 008000 RLA    stage3_metatiles_top_table 008000 RLA    
 stage1_metatiles_bottom_table 008004 RLA    stage3_metatiles_bottom_table 008004 RLA    
-stage3_screen1_table      008008 RLA    stage1_screen1_table      008008 RLA    
-stage3_screen1_attribs_table 0080F8 RLA    stage1_screen1_attribs_table 0080F8 RLA    
 stage3_sequence_hi_table  008138 RLA    stage3_sequence_lo_table  00813D RLA    
 stage3_attribs_sequence_hi_table 008142 RLA    stage3_attribs_sequence_lo_table 008147 RLA    
 stage3_palette_table      00814C RLA    stage1_sequence_hi_table  008268 RLA    
 stage1_sequence_lo_table  008272 RLA    stage1_attribs_sequence_hi_table 00827C RLA    
 stage1_attribs_sequence_lo_table 008286 RLA    stage1_palette_table      008290 RLA    
 stage2_metatiles_top_table 00A000 RLA    stage2_metatiles_bottom_table 00A004 RLA    
-stage2_screen1_table      00A008 RLA    stage2_screen1_attribs_table 00A0F8 RLA    
 stage2_sequence_hi_table  00A138 RLA    stage2_sequence_lo_table  00A13D RLA    
 stage2_attribs_sequence_hi_table 00A142 RLA    stage2_attribs_sequence_lo_table 00A147 RLA    
 stage2_palette_table      00A14C RLA    
@@ -73,57 +67,45 @@ stage2_palette_table      00A14C RLA
 Imports list:
 -------------
 stage1_attribs_sequence_hi_table (stage1_data.o):
-    main.o                    src/load_gameplay_level.asm:24
+    main.o                    src/load_gameplay_level.asm:20
 stage1_attribs_sequence_lo_table (stage1_data.o):
-    main.o                    src/load_gameplay_level.asm:25
+    main.o                    src/load_gameplay_level.asm:21
 stage1_metatiles_bottom_table (stage1_data.o):
     main.o                    src/load_gameplay_level.asm:17
 stage1_metatiles_top_table (stage1_data.o):
     main.o                    src/load_gameplay_level.asm:16
 stage1_palette_table (stage1_data.o):
-    main.o                    src/load_gameplay_level.asm:26
-stage1_screen1_attribs_table (stage1_data.o):
-    main.o                    src/load_gameplay_level.asm:19
-stage1_screen1_table (stage1_data.o):
-    main.o                    src/load_gameplay_level.asm:18
-stage1_sequence_hi_table (stage1_data.o):
     main.o                    src/load_gameplay_level.asm:22
+stage1_sequence_hi_table (stage1_data.o):
+    main.o                    src/load_gameplay_level.asm:18
 stage1_sequence_lo_table (stage1_data.o):
-    main.o                    src/load_gameplay_level.asm:23
+    main.o                    src/load_gameplay_level.asm:19
 stage2_attribs_sequence_hi_table (stage2_data.o):
-    main.o                    src/load_gameplay_level.asm:34
-stage2_attribs_sequence_lo_table (stage2_data.o):
-    main.o                    src/load_gameplay_level.asm:35
-stage2_metatiles_bottom_table (stage2_data.o):
-    main.o                    src/load_gameplay_level.asm:29
-stage2_metatiles_top_table (stage2_data.o):
     main.o                    src/load_gameplay_level.asm:28
+stage2_attribs_sequence_lo_table (stage2_data.o):
+    main.o                    src/load_gameplay_level.asm:29
+stage2_metatiles_bottom_table (stage2_data.o):
+    main.o                    src/load_gameplay_level.asm:25
+stage2_metatiles_top_table (stage2_data.o):
+    main.o                    src/load_gameplay_level.asm:24
 stage2_palette_table (stage2_data.o):
-    main.o                    src/load_gameplay_level.asm:36
-stage2_screen1_attribs_table (stage2_data.o):
-    main.o                    src/load_gameplay_level.asm:31
-stage2_screen1_table (stage2_data.o):
     main.o                    src/load_gameplay_level.asm:30
 stage2_sequence_hi_table (stage2_data.o):
-    main.o                    src/load_gameplay_level.asm:32
+    main.o                    src/load_gameplay_level.asm:26
 stage2_sequence_lo_table (stage2_data.o):
-    main.o                    src/load_gameplay_level.asm:33
+    main.o                    src/load_gameplay_level.asm:27
 stage3_attribs_sequence_hi_table (stage3_data.o):
-    main.o                    src/load_gameplay_level.asm:44
+    main.o                    src/load_gameplay_level.asm:36
 stage3_attribs_sequence_lo_table (stage3_data.o):
-    main.o                    src/load_gameplay_level.asm:45
+    main.o                    src/load_gameplay_level.asm:37
 stage3_metatiles_bottom_table (stage3_data.o):
-    main.o                    src/load_gameplay_level.asm:39
+    main.o                    src/load_gameplay_level.asm:33
 stage3_metatiles_top_table (stage3_data.o):
-    main.o                    src/load_gameplay_level.asm:38
+    main.o                    src/load_gameplay_level.asm:32
 stage3_palette_table (stage3_data.o):
-    main.o                    src/load_gameplay_level.asm:46
-stage3_screen1_attribs_table (stage3_data.o):
-    main.o                    src/load_gameplay_level.asm:41
-stage3_screen1_table (stage3_data.o):
-    main.o                    src/load_gameplay_level.asm:40
+    main.o                    src/load_gameplay_level.asm:38
 stage3_sequence_hi_table (stage3_data.o):
-    main.o                    src/load_gameplay_level.asm:42
+    main.o                    src/load_gameplay_level.asm:34
 stage3_sequence_lo_table (stage3_data.o):
-    main.o                    src/load_gameplay_level.asm:43
+    main.o                    src/load_gameplay_level.asm:35
 

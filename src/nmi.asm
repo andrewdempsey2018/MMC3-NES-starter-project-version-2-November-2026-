@@ -11,8 +11,8 @@ nmi:
 ; IRQ only tasks
 ; Code that executes when MMC3 scanline IRQ is on.
 ; --------------------------------------------------
-  ;lda do_irq
-  ;beq no_irq
+  lda do_irq
+  beq no_irq
 
 ; IRQ changes some palette values to colors needed
 ; for status bar, restore these to orignal values.

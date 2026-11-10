@@ -4,6 +4,7 @@
 LEVEL_1_SCENE = 0
 LEVEL_2_SCENE = 1
 LEVEL_3_SCENE = 2
+STATIC_SCREEN_SCENE = 3
 
 .segment "ZEROPAGE"
 sleeping: .res 1
@@ -46,6 +47,9 @@ metatile_bottom_ptr: .res 2
 metatile_bottom_ptr_lo = metatile_bottom_ptr
 metatile_bottom_ptr_hi = metatile_bottom_ptr + 1
 
+; scratch
+zp_scratch_01: .res 1
+
 .segment "BSS"
 row_data: .res 32
 attrib_data: .res 8
@@ -77,6 +81,7 @@ palette_table:
 .include "irq.asm"
 .include "controllers.asm"
 .include "load_gameplay_level.asm"
+.include "load_static_screen.asm"
 .include "prepare_row.asm"
 .include "draw_row.asm"
 .include "clear_nametable.asm"
@@ -147,6 +152,8 @@ main:
 
   sta sequence_index
 
+  sta zp_scratch_01
+
 ; --------------------------------------------------
 ; Load status bar into nametable 01 ($2400)
 ; --------------------------------------------------
@@ -214,6 +221,8 @@ main_loop:
   beq @level_2_scene
   cmp #LEVEL_3_SCENE
   beq @level_3_scene
+  cmp #STATIC_SCREEN_SCENE
+  beq @static_screen_scene
 
 @level_1_scene:
   lda buttons_pressed
@@ -234,6 +243,15 @@ main_loop:
   jmp finished_updating_scene
 
 @level_3_scene:
+  lda buttons_pressed
+  and #BTN_START
+  beq finished_updating_scene
+  lda #$03
+  sta scene_number
+  jsr load_static_screen
+  jmp finished_updating_scene
+
+@static_screen_scene:
   ; do stuff
   jmp finished_updating_scene
 

@@ -50,6 +50,8 @@ load_gameplay_level:
   sta PPUSCROLL
   sta scroll_y
   sta scroll_x
+  sta do_scroll
+  sta do_irq
   sta sequence_index
   sta row_number
   jsr clear_nametable

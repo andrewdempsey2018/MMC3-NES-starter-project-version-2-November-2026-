@@ -3,8 +3,8 @@ Modules list:
 main.o:
     RODATA            Offs=000000  Size=00047A  Align=00001  Fill=0000
     BSS               Offs=000000  Size=000028  Align=00001  Fill=0000
-    ZEROPAGE          Offs=000000  Size=00001F  Align=00001  Fill=0000
-    FIXED_CODE1       Offs=000000  Size=0004C4  Align=00001  Fill=0000
+    ZEROPAGE          Offs=000000  Size=000020  Align=00001  Fill=0000
+    FIXED_CODE1       Offs=000000  Size=000604  Align=00001  Fill=0000
     HEADER            Offs=000000  Size=000010  Align=00001  Fill=0000
     FIXED_CODE0       Offs=000000  Size=0000E3  Align=00001  Fill=0000
     VECTORS           Offs=000000  Size=000006  Align=00001  Fill=0000
@@ -23,14 +23,14 @@ Name                   Start     End    Size  Align
 ----------------------------------------------------
 CHR_ROM               000000  007FFF  008000  00001
 HEADER                000000  00000F  000010  00001
-ZEROPAGE              000000  00001E  00001F  00001
+ZEROPAGE              000000  00001F  000020  00001
 BSS                   000300  000327  000028  00001
 CODE0                 008000  0082AF  0002B0  00001
 CODE2                 008000  00816B  00016C  00001
 CODE1                 00A000  00A16B  00016C  00001
 FIXED_CODE0           00C000  00C0E2  0000E3  00001
-FIXED_CODE1           00E000  00E4C3  0004C4  00001
-RODATA                00E500  00E979  00047A  00001
+FIXED_CODE1           00E000  00E603  000604  00001
+RODATA                00E700  00EB79  00047A  00001
 VECTORS               00FFFA  00FFFF  000006  00001
 
 

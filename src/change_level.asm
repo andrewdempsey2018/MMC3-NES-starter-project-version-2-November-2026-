@@ -58,6 +58,8 @@ change_level:
   sta PPUSCROLL
   sta scroll_y
   sta scroll_x
+  sta row_number
+  jsr clear_nametable
 ; --------------------------------------------------
 
   lda scene_number

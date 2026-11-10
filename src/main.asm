@@ -55,10 +55,7 @@ palette_table:
   .byte $0F,$01,$21,$31
   .byte $0F,$06,$16,$26
   .byte $0F,$09,$19,$29
-
-;.include "../data/stage1_data.asm"
-;.include "../data/stage2_data.asm"
-;.include "../data/stage3_data.asm"
+  
 .include "../data/statusbar_data.asm"
 
 .segment "FIXED_CODE1"
@@ -75,6 +72,7 @@ palette_table:
 .include "change_level.asm"
 .include "prepare_row.asm"
 .include "draw_row.asm"
+.include "clear_nametable.asm"
 
 main:
 ; --------------------------------------------------

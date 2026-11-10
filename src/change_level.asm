@@ -58,6 +58,7 @@ change_level:
   sta PPUSCROLL
   sta scroll_y
   sta scroll_x
+  sta sequence_index
   sta row_number
   jsr clear_nametable
 ; --------------------------------------------------
@@ -150,6 +151,26 @@ change_level:
   lda #>stage1_metatiles_bottom_table
   sta metatile_bottom_ptr_hi
 
+  lda #<stage1_sequence_lo_table
+  sta screens_sequence_lo_ptr
+  lda #>stage1_sequence_lo_table
+  sta screens_sequence_lo_ptr + 1
+
+  lda #<stage1_sequence_hi_table
+  sta screens_sequence_hi_ptr
+  lda #>stage1_sequence_hi_table
+  sta screens_sequence_hi_ptr + 1
+
+  lda #<stage1_attribs_sequence_lo_table
+  sta attribs_sequence_lo_ptr
+  lda #>stage1_attribs_sequence_lo_table
+  sta attribs_sequence_lo_ptr + 1
+
+  lda #<stage1_attribs_sequence_hi_table
+  sta attribs_sequence_hi_ptr
+  lda #>stage1_attribs_sequence_hi_table
+  sta attribs_sequence_hi_ptr + 1
+
   jmp prepare_for_scrolling
 
 @level_2_scene:
@@ -226,6 +247,26 @@ change_level:
   lda #>stage2_metatiles_bottom_table
   sta metatile_bottom_ptr_hi
 
+  lda #<stage2_sequence_lo_table
+  sta screens_sequence_lo_ptr
+  lda #>stage2_sequence_lo_table
+  sta screens_sequence_lo_ptr + 1
+
+  lda #<stage2_sequence_hi_table
+  sta screens_sequence_hi_ptr
+  lda #>stage2_sequence_hi_table
+  sta screens_sequence_hi_ptr + 1
+
+  lda #<stage2_attribs_sequence_lo_table
+  sta attribs_sequence_lo_ptr
+  lda #>stage2_attribs_sequence_lo_table
+  sta attribs_sequence_lo_ptr + 1
+
+  lda #<stage2_attribs_sequence_hi_table
+  sta attribs_sequence_hi_ptr
+  lda #>stage2_attribs_sequence_hi_table
+  sta attribs_sequence_hi_ptr + 1
+
   jmp prepare_for_scrolling
 
 @level_3_scene:
@@ -301,6 +342,26 @@ change_level:
   sta metatile_bottom_ptr_lo
   lda #>stage3_metatiles_bottom_table
   sta metatile_bottom_ptr_hi
+
+  lda #<stage3_sequence_lo_table
+  sta screens_sequence_lo_ptr
+  lda #>stage3_sequence_lo_table
+  sta screens_sequence_lo_ptr + 1
+
+  lda #<stage3_sequence_hi_table
+  sta screens_sequence_hi_ptr
+  lda #>stage3_sequence_hi_table
+  sta screens_sequence_hi_ptr + 1
+
+  lda #<stage3_attribs_sequence_lo_table
+  sta attribs_sequence_lo_ptr
+  lda #>stage3_attribs_sequence_lo_table
+  sta attribs_sequence_lo_ptr + 1
+
+  lda #<stage3_attribs_sequence_hi_table
+  sta attribs_sequence_hi_ptr
+  lda #>stage3_attribs_sequence_hi_table
+  sta attribs_sequence_hi_ptr + 1
 
   jmp prepare_for_scrolling
 

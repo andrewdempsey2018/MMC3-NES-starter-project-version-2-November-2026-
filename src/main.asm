@@ -13,6 +13,7 @@ do_scroll: .res 1
 row_number: .res 1
 do_irq: .res 1
 scene_number: .res 1
+sequence_index: .res 1
 
 tile_ptr: .res 2
 tile_ptr_lo = tile_ptr
@@ -21,6 +22,12 @@ tile_ptr_hi = tile_ptr + 1
 attrib_ptr: .res 2
 attrib_ptr_lo = attrib_ptr
 attrib_ptr_hi = attrib_ptr + 1
+
+screens_sequence_lo_ptr: .res 2
+screens_sequence_hi_ptr: .res 2
+
+attribs_sequence_lo_ptr: .res 2
+attribs_sequence_hi_ptr: .res 2
 
 do_prep_row: .res 1
 do_prep_attrib: .res 1
@@ -55,7 +62,7 @@ palette_table:
   .byte $0F,$01,$21,$31
   .byte $0F,$06,$16,$26
   .byte $0F,$09,$19,$29
-  
+
 .include "../data/statusbar_data.asm"
 
 .segment "FIXED_CODE1"
@@ -127,6 +134,18 @@ main:
   sta metatile_top_ptr_hi
   sta metatile_bottom_ptr_lo
   sta metatile_bottom_ptr_hi
+
+  sta screens_sequence_lo_ptr
+  sta screens_sequence_lo_ptr + 1
+  sta screens_sequence_hi_ptr
+  sta screens_sequence_hi_ptr + 1
+
+  sta attribs_sequence_lo_ptr
+  sta attribs_sequence_lo_ptr + 1
+  sta attribs_sequence_hi_ptr
+  sta attribs_sequence_hi_ptr + 1
+
+  sta sequence_index
 
 ; --------------------------------------------------
 ; Load status bar into nametable 01 ($2400)

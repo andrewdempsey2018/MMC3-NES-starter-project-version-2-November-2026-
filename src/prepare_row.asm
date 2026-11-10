@@ -7,6 +7,24 @@ prepare_row:
   bne dont_reset_row_number
   lda #0
   sta row_number
+
+; sequence >>>
+  inc sequence_index
+
+; tiles
+  ldy sequence_index
+  lda (screens_sequence_lo_ptr), y
+  sta tile_ptr_lo
+  lda (screens_sequence_hi_ptr), y
+  sta tile_ptr_hi
+
+; attribs
+  lda (attribs_sequence_lo_ptr), y
+  sta attrib_ptr_lo
+  lda (attribs_sequence_hi_ptr), y
+  sta attrib_ptr_hi
+; sequence <<<
+
 dont_reset_row_number:
 
 ; attribs

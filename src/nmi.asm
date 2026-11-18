@@ -74,6 +74,10 @@ no_irq:
   lda do_scroll
   beq dont_scroll
 
+  lda scroll_y
+  and #%00000111 ; multiple of 8
+  bne dont_draw_row
+
   ; get row number
   lda scroll_y
   lsr a
@@ -81,14 +85,9 @@ no_irq:
   lsr a
   sta row_number
 
-
-
-  lda scroll_y
-  and #%00000111 ; multiple of 8
-  bne dont_draw_row
   
   ;;;
-    lda row_number
+  lda row_number
   cmp #28
   bne :+
   lda #1

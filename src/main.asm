@@ -30,8 +30,10 @@ screens_sequence_hi_ptr: .res 2
 attribs_sequence_lo_ptr: .res 2
 attribs_sequence_hi_ptr: .res 2
 
-do_prep_row: .res 1
+do_prep_bottom_row: .res 1
+do_prep_top_row: .res 1
 do_prep_attrib: .res 1
+do_inc_sequence: .res 1
 
 temp: .res 1
 ptr: .res 2
@@ -51,7 +53,8 @@ metatile_bottom_ptr_hi = metatile_bottom_ptr + 1
 zp_scratch_01: .res 1
 
 .segment "BSS"
-row_data: .res 32
+row_top_data: .res 32
+row_bottom_data: .res 32
 attrib_data: .res 8
 
 .segment "RODATA"
@@ -81,9 +84,12 @@ palette_table:
 .include "irq.asm"
 .include "controllers.asm"
 .include "load_gameplay_level.asm"
-.include "load_static_screen.asm"
-.include "prepare_row.asm"
-.include "draw_row.asm"
+.include "prepare_bottom_row.asm"
+.include "prepare_top_row.asm"
+.include "draw_top_row.asm"
+.include "draw_bottom_row.asm"
+.include "prepare_attributes.asm"
+.include "draw_attributes.asm"
 .include "clear_nametable.asm"
 
 main:
@@ -128,8 +134,10 @@ main:
   sta tile_ptr_hi
   sta attrib_ptr_lo
   sta attrib_ptr_hi
-  sta do_prep_row
+  sta do_prep_bottom_row
+  sta do_prep_top_row
   sta do_prep_attrib
+  sta do_inc_sequence
 
   sta temp
   sta ptr_lo
@@ -243,12 +251,6 @@ main_loop:
   jmp finished_updating_scene
 
 @level_3_scene:
-  lda buttons_pressed
-  and #BTN_START
-  beq finished_updating_scene
-  lda #$03
-  sta scene_number
-  jsr load_static_screen
   jmp finished_updating_scene
 
 @static_screen_scene:
@@ -268,10 +270,46 @@ finished_updating_scene:
 ; --------------------------------------------------
 ; Rendering
 ; --------------------------------------------------
-  lda do_prep_row
-  beq dont_prepare_row
-  jsr prepare_row
-dont_prepare_row:
+  lda do_inc_sequence
+  beq dont_inc_sequence
+
+  inc sequence_index
+
+; tiles
+  ldy sequence_index
+  lda (screens_sequence_lo_ptr),y
+  sta tile_ptr_lo
+  lda (screens_sequence_hi_ptr),y
+  sta tile_ptr_hi
+
+; attribs
+  lda (attribs_sequence_lo_ptr),y
+  sta attrib_ptr_lo
+  lda (attribs_sequence_hi_ptr),y
+  sta attrib_ptr_hi
+
+  lda #0
+  sta do_inc_sequence
+dont_inc_sequence:
+
+
+
+  lda do_prep_bottom_row
+  beq dont_prepare_bottom_row
+  jsr prepare_bottom_row
+dont_prepare_bottom_row:
+
+  lda do_prep_top_row
+  beq dont_prepare_top_row
+  jsr prepare_top_row
+dont_prepare_top_row:
+
+  lda do_prep_attrib
+  beq dont_prepare_attribs
+  jsr prepare_attributes
+dont_prepare_attribs:
+
+
 
 ; --------------------------------------------------
 ; Wait until NMI resets 'sleeping' to 0

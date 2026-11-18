@@ -74,12 +74,43 @@ no_irq:
   lda do_scroll
   beq dont_scroll
 
+  ; get row number
+  lda scroll_y
+  lsr a
+  lsr a
+  lsr a
+  sta row_number
+
+
+
   lda scroll_y
   and #%00000111 ; multiple of 8
   bne dont_draw_row
-  jsr draw_row
   
+  ;;;
+    lda row_number
+  cmp #28
+  bne :+
+  lda #1
+  sta do_inc_sequence
+:
+  ;;;
+
+  lda row_number ; Load the number into A
+  and #$01 ; Mask all bits except Bit 0
+  beq is_even ; If the result is 0, Zero flag is set -> it's even
+is_odd:
+  jsr draw_bottom_row
+  jmp dont_draw_row
+is_even:
+  jsr draw_top_row
 dont_draw_row:
+
+  lda scroll_y
+  and #%00011111 ; multiple of 32
+  bne dont_draw_attribs
+  jsr draw_attributes
+dont_draw_attribs:
 
 ; --------------------------------------------------
 ; Handle scrolling
@@ -91,6 +122,8 @@ dont_draw_row:
   lda #0
   sta scroll_y
 dont_reset_scroll_value:
+
+
 
 dont_scroll:
   lda scroll_x

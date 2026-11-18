@@ -330,7 +330,7 @@ load_gameplay_level:
   jmp prepare_for_scrolling
 
 prepare_for_scrolling:
-ldy #$00
+  ldy #$00
   lda (screens_sequence_lo_ptr),y
   sta tile_ptr_lo
   lda (screens_sequence_hi_ptr),y
@@ -341,41 +341,45 @@ ldy #$00
   lda (attribs_sequence_hi_ptr),y
   sta attrib_ptr_hi
 
+  jsr prepare_top_row
+  jsr prepare_bottom_row
+  jsr prepare_attributes
+
 ; prepare first row of tiles
-  ldy #0
-:
-  lda (attrib_ptr),y
-  sta attrib_data,y
-  iny
-  cpy #8
-  bne :-
+;  ldy #0
+;:
+;  lda (attrib_ptr),y
+;  sta attrib_data,y
+;  iny
+;  cpy #8
+;  bne :-
 
-  lda attrib_ptr_lo
-  clc
-  adc #8
-  sta attrib_ptr_lo
-  lda attrib_ptr_hi
-  adc #0
-  sta attrib_ptr_hi
+;  lda attrib_ptr_lo
+;  clc
+;  adc #8
+;  sta attrib_ptr_lo
+;  lda attrib_ptr_hi
+;  adc #0
+;  sta attrib_ptr_hi
 
-  lda #0
-  sta temp
-  ldx #0
-:
-  ldy temp
-  lda (tile_ptr),y
-  asl a
-  tay
-  lda (metatile_top_ptr),y
-  sta row_data,x
-  iny
-  inx
-  lda (metatile_top_ptr),y
-  sta row_data,x
-  inc temp
-  inx
-  cpx #32
-  bne :-
+;  lda #0
+;  sta temp
+;  ldx #0
+;:
+;  ldy temp
+;  lda (tile_ptr),y
+;  asl a
+;  tay
+;  lda (metatile_top_ptr),y
+;  sta row_data,x
+;  iny
+;  inx
+;  lda (metatile_top_ptr),y
+;  sta row_data,x
+;  inc temp
+;  inx
+;  cpx #32
+;  bne :-
 
 ; start scrolling
   lda #$01

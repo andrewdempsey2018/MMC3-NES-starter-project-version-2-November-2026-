@@ -19,12 +19,12 @@ draw_bottom_row:
   sta PPUADDR
 
   ldx #$00
-:
+@loop:
   lda row_bottom_data,x
   sta PPUDATA
   inx
   cpx #32
-  bne :-
+  bne @loop
 
   lda #$01
   sta do_prep_bottom_row

@@ -1,11 +1,10 @@
 .segment "FIXED_CODE0"
 prepare_bottom_row:
 
-
   lda #0
   sta temp
   ldx #0
-:
+@loop:
   ldy temp
   lda (tile_ptr),y
   asl a
@@ -19,7 +18,7 @@ prepare_bottom_row:
   inc temp
   inx
   cpx #32
-  bne :-
+  bne @loop
 
   lda tile_ptr_lo
   clc
@@ -28,7 +27,6 @@ prepare_bottom_row:
   lda tile_ptr_hi
   adc #0
   sta tile_ptr_hi
-
 
   lda #$00
   sta do_prep_bottom_row

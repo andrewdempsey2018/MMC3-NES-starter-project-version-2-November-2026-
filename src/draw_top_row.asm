@@ -11,12 +11,12 @@ draw_top_row:
   sta PPUADDR
 
   ldx #$00
-:
+@loop:
   lda row_top_data,x
   sta PPUDATA
   inx
   cpx #32
-  bne :-
+  bne @loop
 
   lda #$01
   sta do_prep_top_row

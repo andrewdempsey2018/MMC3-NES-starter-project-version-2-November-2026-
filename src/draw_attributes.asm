@@ -15,12 +15,12 @@ draw_attributes:
   sta PPUADDR
 
   ldx #$00
-:
+@loop:
   lda attrib_data,x
   sta PPUDATA
   inx
   cpx #8
-  bne :-
+  bne @loop
 
   lda #$01
   sta do_prep_attrib

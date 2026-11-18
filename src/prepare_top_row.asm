@@ -4,7 +4,7 @@ prepare_top_row:
   lda #0
   sta temp
   ldx #0
-:
+@loop:
   ldy temp
   lda (tile_ptr),y
   asl a
@@ -18,7 +18,7 @@ prepare_top_row:
   inc temp
   inx
   cpx #32
-  bne :-
+  bne @loop
 
   lda #$00
   sta do_prep_top_row

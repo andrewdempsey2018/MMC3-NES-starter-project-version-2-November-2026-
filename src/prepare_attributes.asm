@@ -1,18 +1,13 @@
 .segment "FIXED_CODE0"
 prepare_attributes:
 
-
-
-
-  ;; add some test data to attribs for now, delete this>>>>
   ldy #0
-:
+@loop:
   lda (attrib_ptr),y
   sta attrib_data,y
   iny
   cpy #8
-  bne :-
-  ;;;; add some test data to attribs for now, delete this<<<
+  bne @loop
 
   lda attrib_ptr_lo
   clc
@@ -25,6 +20,4 @@ prepare_attributes:
   lda #0
   sta do_prep_attrib
 
-
-  
   rts

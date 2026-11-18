@@ -54,6 +54,10 @@ load_gameplay_level:
   sta do_irq
   sta sequence_index
   sta row_number
+  sta do_prep_bottom_row
+  sta do_prep_top_row
+  sta do_prep_attrib
+  sta do_inc_sequence
   jsr clear_nametable
 ; --------------------------------------------------
 

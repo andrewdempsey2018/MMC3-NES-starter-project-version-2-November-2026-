@@ -45,6 +45,9 @@ load_gameplay_level:
   stx PPUCTRL
   stx PPUMASK
 
+; --------------------------------------------------
+; Reset memory
+; --------------------------------------------------
   lda #0
   sta PPUSCROLL
   sta PPUSCROLL

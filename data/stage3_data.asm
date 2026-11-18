@@ -129,7 +129,23 @@ stage3_sequence_hi_table:
   .byte >stage3_screen1_table,>stage3_screen2_table,>stage3_screen3_table,>stage3_screen4_table
   .byte >stage3_screen1_table,>stage3_screen2_table,>stage3_screen3_table,>stage3_screen4_table
   .byte >stage3_screen1_table,>stage3_screen2_table,>stage3_screen3_table,>stage3_screen4_table
+  .byte >stage3_screen1_table,>stage3_screen2_table,>stage3_screen3_table,>stage3_screen4_table
+  .byte >stage3_screen1_table,>stage3_screen2_table,>stage3_screen3_table,>stage3_screen4_table
+  .byte >stage3_screen1_table,>stage3_screen2_table,>stage3_screen3_table,>stage3_screen4_table
+  .byte >stage3_screen1_table,>stage3_screen2_table,>stage3_screen3_table,>stage3_screen4_table
+  .byte >stage3_screen1_table,>stage3_screen2_table,>stage3_screen3_table,>stage3_screen4_table
+  .byte >stage3_screen1_table,>stage3_screen2_table,>stage3_screen3_table,>stage3_screen4_table
+  .byte >stage3_screen1_table,>stage3_screen2_table,>stage3_screen3_table,>stage3_screen4_table
+  .byte >stage3_screen1_table,>stage3_screen2_table,>stage3_screen3_table,>stage3_screen4_table
 stage3_sequence_lo_table:
+  .byte <stage3_screen1_table,<stage3_screen2_table,<stage3_screen3_table,<stage3_screen4_table
+  .byte <stage3_screen1_table,<stage3_screen2_table,<stage3_screen3_table,<stage3_screen4_table
+  .byte <stage3_screen1_table,<stage3_screen2_table,<stage3_screen3_table,<stage3_screen4_table
+  .byte <stage3_screen1_table,<stage3_screen2_table,<stage3_screen3_table,<stage3_screen4_table
+  .byte <stage3_screen1_table,<stage3_screen2_table,<stage3_screen3_table,<stage3_screen4_table
+  .byte <stage3_screen1_table,<stage3_screen2_table,<stage3_screen3_table,<stage3_screen4_table
+  .byte <stage3_screen1_table,<stage3_screen2_table,<stage3_screen3_table,<stage3_screen4_table
+  .byte <stage3_screen1_table,<stage3_screen2_table,<stage3_screen3_table,<stage3_screen4_table
   .byte <stage3_screen1_table,<stage3_screen2_table,<stage3_screen3_table,<stage3_screen4_table
   .byte <stage3_screen1_table,<stage3_screen2_table,<stage3_screen3_table,<stage3_screen4_table
   .byte <stage3_screen1_table,<stage3_screen2_table,<stage3_screen3_table,<stage3_screen4_table
@@ -139,7 +155,23 @@ stage3_attribs_sequence_hi_table:
   .byte >stage3_screen1_attribs_table,>stage3_screen2_attribs_table,>stage3_screen3_attribs_table,>stage3_screen4_attribs_table
   .byte >stage3_screen1_attribs_table,>stage3_screen2_attribs_table,>stage3_screen3_attribs_table,>stage3_screen4_attribs_table
   .byte >stage3_screen1_attribs_table,>stage3_screen2_attribs_table,>stage3_screen3_attribs_table,>stage3_screen4_attribs_table
+  .byte >stage3_screen1_attribs_table,>stage3_screen2_attribs_table,>stage3_screen3_attribs_table,>stage3_screen4_attribs_table
+  .byte >stage3_screen1_attribs_table,>stage3_screen2_attribs_table,>stage3_screen3_attribs_table,>stage3_screen4_attribs_table
+  .byte >stage3_screen1_attribs_table,>stage3_screen2_attribs_table,>stage3_screen3_attribs_table,>stage3_screen4_attribs_table
+  .byte >stage3_screen1_attribs_table,>stage3_screen2_attribs_table,>stage3_screen3_attribs_table,>stage3_screen4_attribs_table
+  .byte >stage3_screen1_attribs_table,>stage3_screen2_attribs_table,>stage3_screen3_attribs_table,>stage3_screen4_attribs_table
+  .byte >stage3_screen1_attribs_table,>stage3_screen2_attribs_table,>stage3_screen3_attribs_table,>stage3_screen4_attribs_table
+  .byte >stage3_screen1_attribs_table,>stage3_screen2_attribs_table,>stage3_screen3_attribs_table,>stage3_screen4_attribs_table
+  .byte >stage3_screen1_attribs_table,>stage3_screen2_attribs_table,>stage3_screen3_attribs_table,>stage3_screen4_attribs_table
 stage3_attribs_sequence_lo_table:
+  .byte <stage3_screen1_attribs_table,<stage3_screen2_attribs_table,<stage3_screen3_attribs_table,<stage3_screen4_attribs_table
+  .byte <stage3_screen1_attribs_table,<stage3_screen2_attribs_table,<stage3_screen3_attribs_table,<stage3_screen4_attribs_table
+  .byte <stage3_screen1_attribs_table,<stage3_screen2_attribs_table,<stage3_screen3_attribs_table,<stage3_screen4_attribs_table
+  .byte <stage3_screen1_attribs_table,<stage3_screen2_attribs_table,<stage3_screen3_attribs_table,<stage3_screen4_attribs_table
+  .byte <stage3_screen1_attribs_table,<stage3_screen2_attribs_table,<stage3_screen3_attribs_table,<stage3_screen4_attribs_table
+  .byte <stage3_screen1_attribs_table,<stage3_screen2_attribs_table,<stage3_screen3_attribs_table,<stage3_screen4_attribs_table
+  .byte <stage3_screen1_attribs_table,<stage3_screen2_attribs_table,<stage3_screen3_attribs_table,<stage3_screen4_attribs_table
+  .byte <stage3_screen1_attribs_table,<stage3_screen2_attribs_table,<stage3_screen3_attribs_table,<stage3_screen4_attribs_table
   .byte <stage3_screen1_attribs_table,<stage3_screen2_attribs_table,<stage3_screen3_attribs_table,<stage3_screen4_attribs_table
   .byte <stage3_screen1_attribs_table,<stage3_screen2_attribs_table,<stage3_screen3_attribs_table,<stage3_screen4_attribs_table
   .byte <stage3_screen1_attribs_table,<stage3_screen2_attribs_table,<stage3_screen3_attribs_table,<stage3_screen4_attribs_table

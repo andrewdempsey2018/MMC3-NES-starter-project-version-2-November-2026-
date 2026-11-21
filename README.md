@@ -2,6 +2,8 @@
 
 Intended to be a jumping off point for MMC3 based NES games.
 
+See the 'reversescroll' branch for traditional top down shooter scrolling.
+
 Contains basic, expandable implementations of:
 
 * Improved, simplified scrolling code
@@ -10,6 +12,8 @@ Contains basic, expandable implementations of:
 * Level switching
 * Status bar
 * Controller input
+* Scrolling scenes
+* Static screens (for example, a game title screen)
 
 ![alt text](image.png)
 

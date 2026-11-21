@@ -78,26 +78,27 @@ no_irq:
   and #%00000111 ; multiple of 8
   bne dont_draw_row
 
-  ; get row number
-  lda scroll_y
-  lsr a
-  lsr a
-  lsr a
+  inc row_number
+  lda row_number
+  cmp #30
+  bne :+
+  lda #0
   sta row_number
-
+:
   
-  ;;;
+; at row 28, everything for the current sreen is prepared in ram
+; change sequece in preparation for te next screen of assets
   lda row_number
   cmp #28
-  bne :+
+  bne dont_inc_sequence
   lda #1
   sta do_inc_sequence
-:
-  ;;;
+dont_inc_sequence:
 
-  lda row_number ; Load the number into A
-  and #$01 ; Mask all bits except Bit 0
-  beq is_even ; If the result is 0, Zero flag is set -> it's even
+; is row_number odd or even
+  lda row_number
+  and #$01
+  beq is_even
 is_odd:
   jsr draw_bottom_row
   jmp dont_draw_row
@@ -121,8 +122,6 @@ dont_draw_attribs:
   lda #0
   sta scroll_y
 dont_reset_scroll_value:
-
-
 
 dont_scroll:
   lda scroll_x

@@ -4,7 +4,7 @@ main.o:
     RODATA            Offs=000000  Size=00047A  Align=00001  Fill=0000
     BSS               Offs=000000  Size=000048  Align=00001  Fill=0000
     ZEROPAGE          Offs=000000  Size=000022  Align=00001  Fill=0000
-    FIXED_CODE1       Offs=000000  Size=000502  Align=00001  Fill=0000
+    FIXED_CODE1       Offs=000000  Size=00050B  Align=00001  Fill=0000
     HEADER            Offs=000000  Size=000010  Align=00001  Fill=0000
     FIXED_CODE0       Offs=000000  Size=0000DB  Align=00001  Fill=0000
     VECTORS           Offs=000000  Size=000006  Align=00001  Fill=0000
@@ -29,7 +29,7 @@ CODE0                 008000  0082B7  0002B8  00001
 CODE2                 008000  0085A7  0005A8  00001
 CODE1                 00A000  00A16B  00016C  00001
 FIXED_CODE0           00C000  00C0DA  0000DB  00001
-FIXED_CODE1           00E000  00E501  000502  00001
+FIXED_CODE1           00E000  00E50A  00050B  00001
 RODATA                00E600  00EA79  00047A  00001
 VECTORS               00FFFA  00FFFF  000006  00001
 

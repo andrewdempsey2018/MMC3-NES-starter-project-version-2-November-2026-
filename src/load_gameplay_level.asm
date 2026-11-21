@@ -352,6 +352,9 @@ prepare_for_scrolling:
   jsr prepare_bottom_row
   jsr prepare_attributes
 
+  lda #255
+  sta row_number
+
 ; start scrolling
   lda #$01
   sta do_scroll

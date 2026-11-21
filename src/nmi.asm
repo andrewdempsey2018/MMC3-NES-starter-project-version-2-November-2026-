@@ -87,13 +87,13 @@ no_irq:
 :
   
 ; at row 28, everything for the current sreen is prepared in ram
-; change sequece in preparation for te next screen of assets
+; change sequece in preparation for the next screen of assets
   lda row_number
   cmp #28
-  bne dont_inc_sequence
+  bne dont_set_sequence_flag
   lda #1
   sta do_inc_sequence
-dont_inc_sequence:
+dont_set_sequence_flag:
 
 ; is row_number odd or even
   lda row_number

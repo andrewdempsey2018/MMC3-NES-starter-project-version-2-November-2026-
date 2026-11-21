@@ -2,8 +2,6 @@
 
 Intended to be a jumping off point for MMC3 based NES games.
 
-See the 'reversescroll' branch for traditional top down shooter scrolling.
-
 Contains basic, expandable implementations of:
 
 * Improved, simplified scrolling code
